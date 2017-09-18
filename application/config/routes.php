@@ -79,6 +79,6 @@ $route['404_override']					= 'errors/404.php';
 $route['translate_uri_dashes']			= FALSE;
 */
 
-$route['default_controller'] = 'main/view';
+$route['default_controller'] = 'Main';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

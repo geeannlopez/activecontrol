@@ -18,8 +18,28 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
-	{
+	public function index(){
 		$this->load->view('welcome_message');
+	}
+    
+    public function view($page = 'dashboard'){
+		if( ! isset($this->session->user_id)){
+			redirect('/');
+		}
+
+
+		if ( ! file_exists(APPPATH.'/views/admin/pages/'.$page.'.php')) {
+			// redirect('/');
+			$this->load->view('admin/templates/head', $content);
+			$this->load->view('admin/templates/nav', $content);
+			$this->load->view('admin/pages/404');
+			$this->load->view('admin/templates/footer', $content);
+
+		} else {
+			$this->load->view('admin/templates/head', $content);
+			$this->load->view('admin/templates/nav', $content);
+			$this->load->view('admin/pages/'.$page, $data);
+			$this->load->view('admin/templates/footer', $content);
+		}
 	}
 }
