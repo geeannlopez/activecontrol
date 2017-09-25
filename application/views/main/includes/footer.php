@@ -1,5 +1,4 @@
-
-        <!-- *** FOOTER ***
+<!-- *** FOOTER ***
 _________________________________________________________ -->
 
         <footer id="footer">
@@ -41,7 +40,7 @@ _________________________________________________________ -->
                         <div class="item same-height-row clearfix">
                             <div class="image same-height-always">
                                 <a href="#">
-                                    <img class="img-responsive" src="img/detailsquare.jpg" alt="">
+                                    <img class="img-responsive" src="<?=base_url()?>/assets/img/detailsquare.jpg" alt="">
                                 </a>
                             </div>
                             <div class="name same-height-always">
@@ -52,7 +51,7 @@ _________________________________________________________ -->
                         <div class="item same-height-row clearfix">
                             <div class="image same-height-always">
                                 <a href="#">
-                                    <img class="img-responsive" src="img/detailsquare.jpg" alt="">
+                                    <img class="img-responsive" src="<?=base_url()?>/assets/img/detailsquare.jpg" alt="">
                                 </a>
                             </div>
                             <div class="name same-height-always">
@@ -63,7 +62,7 @@ _________________________________________________________ -->
                         <div class="item same-height-row clearfix">
                             <div class="image same-height-always">
                                 <a href="#">
-                                    <img class="img-responsive" src="img/detailsquare.jpg" alt="">
+                                    <img class="img-responsive" src="<?=base_url()?>/assets/img/detailsquare.jpg" alt="">
                                 </a>
                             </div>
                             <div class="name same-height-always">
@@ -106,32 +105,32 @@ _________________________________________________________ -->
                     <div class="photostream">
                         <div>
                             <a href="#">
-                                <img src="img/detailsquare.jpg" class="img-responsive" alt="#">
+                                <img src="<?=base_url()?>/assets/img/detailsquare.jpg" class="img-responsive" alt="#">
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                <img src="img/detailsquare2.jpg" class="img-responsive" alt="#">
+                                <img src="<?=base_url()?>/assets/img/detailsquare2.jpg" class="img-responsive" alt="#">
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                <img src="img/detailsquare3.jpg" class="img-responsive" alt="#">
+                                <img src="<?=base_url()?>/assets/img/detailsquare3.jpg" class="img-responsive" alt="#">
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                <img src="img/detailsquare3.jpg" class="img-responsive" alt="#">
+                                <img src="<?=base_url()?>/assets/img/detailsquare3.jpg" class="img-responsive" alt="#">
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                <img src="img/detailsquare2.jpg" class="img-responsive" alt="#">
+                                <img src="<?=base_url()?>/assets/img/detailsquare2.jpg" class="img-responsive" alt="#">
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                <img src="img/detailsquare.jpg" class="img-responsive" alt="#">
+                                <img src="<?=base_url()?>/assets/img/detailsquare.jpg" class="img-responsive" alt="#">
                             </a>
                         </div>
                     </div>
@@ -176,16 +175,16 @@ _________________________________________________________ -->
     </script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-    <script src="js/jquery.cookie.js"></script>
-    <script src="js/waypoints.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/jquery.parallax-1.1.3.js"></script>
-    <script src="js/front.js"></script>
+    <script src="<?=base_url()?>/assets/js/jquery.cookie.js"></script>
+    <script src="<?=base_url()?>/assets/js/waypoints.min.js"></script>
+    <script src="<?=base_url()?>/assets/js/jquery.counterup.min.js"></script>
+    <script src="<?=base_url()?>/assets/js/jquery.parallax-1.1.3.js"></script>
+    <script src="<?=base_url()?>/assets/js/front.js"></script>
 
     
 
     <!-- owl carousel -->
-    <script src="js/owl.carousel.min.js"></script>
+    <script src="<?=base_url()?>/assets/js/owl.carousel.min.js"></script>
 
 
 
