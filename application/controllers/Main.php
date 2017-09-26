@@ -60,18 +60,19 @@ class Main extends MY_Controller
     function verify_login()
     {
 
-        $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_database');
+        $this->form_validation->set_rules('email', 'Email Address', 'trim|required');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|callback_check_database');
 
         if($this->form_validation->run() == FALSE)
         {
             //Field validation failed.  User redirected to login page
-            $this->load->view('login_view');
+            redirect('/Main');
         }
         else
         {
             //Go to private area
-            redirect('home', 'refresh');
+            
+            redirect('/customer', 'location');
         }
 
     }
@@ -79,19 +80,18 @@ class Main extends MY_Controller
     function check_database($password)
     {
         //Field validation succeeded.  Validate against database
-        $username = $this->input->post('username');
+        $email = $this->input->post('email');
 
         //query the database
-        $result = $this->user->login($username, $password);
-
+        $result = $this->user_model->login($email, $password);
         if($result)
         {
             $sess_array = array();
             foreach($result as $row)
             {
                 $sess_array = array(
-                    'id' => $row->id,
-                    'username' => $row->username
+                    'id' => $row->cust_id,
+                    'username' => $row->cust_email
                 );
                 $this->session->set_userdata('logged_in', $sess_array);
             }

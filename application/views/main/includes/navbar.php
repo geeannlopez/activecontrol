@@ -376,12 +376,12 @@ _________________________________________________________ -->
                         <h4 class="modal-title" id="Login">Customer login</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="customer-orders.html" method="post">
+                        <form action="<?=base_url()?>Main/verify_login" method="post">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="email_modal" placeholder="email">
+                                <input type="text" class="form-control" id="email_modal" placeholder="email" name="email">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" id="password_modal" placeholder="password">
+                                <input type="password" class="form-control" id="password_modal" placeholder="password" name="password">
                             </div>
 
                             <p class="text-center">

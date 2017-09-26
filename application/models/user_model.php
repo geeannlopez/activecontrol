@@ -1,18 +1,33 @@
 <?php
 class user_model extends CI_Model
 {
-    function __construct()
-    {
+    function __construct(){
         // Call the Model constructor
-		$this->load->database();
+        $this->load->database();
     }
-    
+
     //insert into user table
-    function insertUser($data)
-    {
+    function insertUser($data){
         return $this->db->insert('customer', $data);
     }
-    
+
+    function login($email, $password){
+        $this -> db -> select('*');
+        $this -> db -> from('customer');
+        $this -> db -> where('cust_email', $email);
+        $this -> db -> where('cust_pass', md5($password));
+        $this -> db -> limit(1);
+
+        $query = $this->db->get();
+        if ($query){
+            return $query->result();
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     //send verification email to user's email id
     /*
     function sendEmail($to_email)
@@ -20,7 +35,7 @@ class user_model extends CI_Model
         $from_email = 'team@mydomain.com'; //change this to yours
         $subject = 'Verify Your Email Address';
         $message = 'Dear User,<br /><br />Please click on the below activation link to verify your email address.<br /><br /> http://www.mydomain.com/user/verify/' . md5($to_email) . '<br /><br /><br />Thanks<br />Mydomain Team';
-        
+
         //configure email settings
         $config['protocol'] = 'smtp';
         $config['smtp_host'] = 'ssl://smtp.mydomain.com'; //smtp host name
@@ -32,7 +47,7 @@ class user_model extends CI_Model
         $config['wordwrap'] = TRUE;
         $config['newline'] = "\r\n"; //use double quotes
         $this->email->initialize($config);
-        
+
         //send mail
         $this->email->from($from_email, 'Mydomain');
         $this->email->to($to_email);
@@ -40,7 +55,7 @@ class user_model extends CI_Model
         $this->email->message($message);
         return $this->email->send();
     }
-    
+
     //activate user account
     function verifyEmailID($key)
     {
