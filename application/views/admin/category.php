@@ -7,7 +7,7 @@ $(document).ready(function(){
     });
     $("#edit_category").hide();  
     $(".edit").click(function(){
-        $("#edit_category").toggle();
+        $("#edit_category").show();
         $("#add_category").hide();  
 
     var id = $(this).data('id');
