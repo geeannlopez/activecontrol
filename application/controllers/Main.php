@@ -7,6 +7,12 @@ class Main extends MY_Controller
         parent::__construct();
         // $this->load->helper('encryptor');
         $this->load->model('user_model');
+
+        if($this->user->info('user_type') == 'admin'){
+            redirect('/admin');
+        }else if($this->user->info('user_type') == 'customer'){
+            redirect('/customer');
+        }
     }
 
     public function index(){
@@ -15,8 +21,8 @@ class Main extends MY_Controller
 
     function register(){
         //set validation rules
-        $this->form_validation->set_rules('name', 'Full Name', 'trim|required|min_length[3]|max_length[30]');
-        $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email');
+        $this->form_validation->set_rules('name', 'Full Name', 'trim|alpha|required|min_length[3]|max_length[30]');
+        $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email|is_unique[users.user_email]');
         $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required');
         $this->form_validation->set_rules('contact', 'Contact Number', 'trim|required|numeric');
         $this->form_validation->set_rules('address', 'Address', 'trim|required');
@@ -32,12 +38,12 @@ class Main extends MY_Controller
         {
             //insert the user registration details into database
             $data = array(
-                'cust_name' => $this->input->post('name'),
-                'cust_email' => $this->input->post('email'),
-                'cust_bday' => $this->input->post('birthday'),
-                'cust_contactno' => $this->input->post('contact'),
-                'cust_address' => $this->input->post('address'),
-                'cust_pass' => md5($this->input->post('password'))
+                'user_name' => $this->input->post('name'),
+                'user_email' => $this->input->post('email'),
+                'user_bday' => $this->input->post('birthday'),
+                'user_contactno' => $this->input->post('contact'),
+                'user_address' => $this->input->post('address'),
+                'user_pass' => md5($this->input->post('password'))
             );
 
             // insert form data into database
@@ -50,13 +56,13 @@ class Main extends MY_Controller
                 $this->session->set_flashdata('message', '<div  class="alert alert-danger alert-dismissible" role="alert">
                             <button type="button" class="close" data-dismiss="alert"><span aria-    hidden="true">×</span><span class="sr-only">Close</span>
                             </button>Unable to register.</div>');
-                var_dump($this->db->error());
                 parent::main_page('registration');
             }
 
         }
     }
 
+    
     function verify_login()
     {
 
@@ -90,8 +96,9 @@ class Main extends MY_Controller
             foreach($result as $row)
             {
                 $sess_array = array(
-                    'id' => $row->cust_id,
-                    'username' => $row->cust_email
+                    'id' => $row->user_id,
+                    'username' => $row->user_email,
+                    'type' => $row->user_type
                 );
                 $this->session->set_userdata('logged_in', $sess_array);
             }

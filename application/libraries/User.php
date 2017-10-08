@@ -15,13 +15,14 @@ class User {
     }
 
     public function info($col) {
-        $sess = $this->CI->session->userdata('user_logged_in');
-        $where = [ 'id' => $sess['id'] ];
-        $userinfo = $this->CI->Crud_model->fetch_tag_row('*','users',$where);
+        $sess = $this->CI->session->userdata('logged_in');
+        $where = [ 'user_id' => $sess['id'] ];
+        $userinfo = $this->CI->user_model->fetch_users($where);
+
         if(!$userinfo == NULL) {
             return $userinfo->$col; 
         }else{
-            echo "Error mo to!";
+            return false;
         }
     }
 }

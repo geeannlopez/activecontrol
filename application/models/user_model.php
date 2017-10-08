@@ -8,14 +8,20 @@ class user_model extends CI_Model
 
     //insert into user table
     function insertUser($data){
-        return $this->db->insert('customer', $data);
+        return $this->db->insert('users', $data);
+
+    }
+    function fetch_users($where){
+      $query = $this->db->get_where('users',  $where);
+
+        return $query->row();
     }
 
     function login($email, $password){
         $this -> db -> select('*');
-        $this -> db -> from('customer');
-        $this -> db -> where('cust_email', $email);
-        $this -> db -> where('cust_pass', md5($password));
+        $this -> db -> from('users');
+        $this -> db -> where('user_email', $email);
+        $this -> db -> where('user_pass', md5($password));
         $this -> db -> limit(1);
 
         $query = $this->db->get();
