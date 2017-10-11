@@ -23,14 +23,18 @@
           <a href="#">
             <i class="fa fa-book"></i> <span>Items & Category</span>
             <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
+              <i class="fa fa-angle-left pull-right"></i>
                 </span>
           </a>
           <ul class="treeview-menu">
             <li><a href="<?= base_url()?>admin/category"><i class="fa fa-circle-o"></i>Category</a></li>
-            <li><a href="<?= base_url()?>admin/add_category"><i class="fa fa-circle-o"></i>Add Category</a></li>
-          </ul>
+            <li><a href="<?= base_url()?>admin/add_product"><i class="fa fa-circle-o"></i>Add Product</a></li>
+            <li><a href="<?= base_url()?>admin/products"><i class="fa fa-circle-o"></i>View Products</a></li>
+          </ul>          
         </li>
+            <li><a href="<?= base_url()?>admin/products"><i class="fa fa-circle-o"></i>Inventory</a></li>
+            <li><a href="<?= base_url()?>admin/products"><i class="fa fa-circle-o"></i>Customers</a></li>
+            <li><a href="<?= base_url()?>admin/products"><i class="fa fa-circle-o"></i>Orders</a></li>            
       </ul>
       <!-- /.sidebar-menu -->
     </section>

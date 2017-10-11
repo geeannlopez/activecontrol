@@ -49,7 +49,7 @@ $(document).ready(function(){
               <div class="box-body">
                 <div class="form-group">
                   <label for="name">Category Name</label>
-                  <input type="text" name="name" class="form-control" placeholder="Category">
+                  <input type="text" name="name" class="form-control" placeholder="Category" value="<?= set_value('name'); ?>">
                   <input type="hidden" name="action" class="form-control" value="add" placeholder="">
                 </div>
                 <button type="submit" class="btn btn-success pull-right btn-sm">Add</button>
@@ -90,7 +90,11 @@ $(document).ready(function(){
                 <?php foreach ($category as $i) { ?>
                 <tr>
                   <td><?= $i->category_name; ?></td>
-                  <td><?= $i->status;?>
+                  <td><?php if ($i->status == 1){
+                      echo "enabled";
+                    }else{
+                      echo "disabled";
+                      }?>
                   <button class="btn btn btn-xs pull-right edit" data-id="<?= $i->category_id ?>" data-name="<?= $i->category_name ?>">EDIT</button></td>
                 </tr>
                 <?php } ?>

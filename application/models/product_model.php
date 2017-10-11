@@ -24,5 +24,16 @@ class product_model extends CI_Model
         return $this->db->update($table, $data); 
 
     }
+
+    function jointable($get ,$table1, $table2, $joinid, $join){
+        $this->db->select($get);
+        $this->db->from($table1);
+        $this->db->join($table2, $joinid, $join);
+        $query = $this->db->get();
+
+        return $query->result();
+
+    }
+
 }
 ?>
