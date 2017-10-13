@@ -92,19 +92,65 @@ class Admin extends MY_Controller
             );
 
             $this->product_model->insertdata($table = "products", $data);
+
             
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible" role="alert">
                             <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
                             </button>Successfully Added. </div>');
 
             redirect('admin/add_product');
-        }
+         }
         }
  
     }
 
 
+        //view sa add product
+    public function inventory(){
+            $data["products"] = $this->product_model->jointable('*', 'products', 'item_total', 'products.prod_id = item_total.product_id', 'left');
+         parent::admin_page('inventory', $data);
+        }
 
+      //view sa add ng stock
+    public function add_stock(){
+
+        $this->form_validation->set_rules('invoiceno', 'Invoice', 'required');
+        $this->form_validation->set_rules('invoicedate', 'Invoice Date', 'required');
+        $this->form_validation->set_rules('qty_received', 'Qty', 'required');
+        $this->form_validation->set_rules('price', 'Price', 'required|greater_than_equal_to[0]');
+
+        if ($this->form_validation->run() == FALSE){
+
+            $this->inventory();
+
+        }else{
+
+            //data for item received table
+            $data = array(
+            'prod_id' => $this->input->post('id'),
+            'invoice_no' => $this->input->post('invoiceno'),
+            'invoice_date' => $this->input->post('invoicedate'),
+            'qty' => $this->input->post('qty_received'),
+            'amount_pc' => $this->input->post('price')
+            );
+
+
+            $this->product_model->insertdata($table = "item_received", $data);
+
+            $this->product_model->update_stock();
+
+            
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                            </button>Successfully Added. </div>');
+
+            redirect('admin/inventory');
+
+        }
+        }
+
+
+    /*********                ********/
     function image_upload(){
           if($_FILES['image']['size'] != 0){
             $upload_dir = './images/';

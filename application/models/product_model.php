@@ -25,6 +25,41 @@ class product_model extends CI_Model
 
     }
 
+    function update_stock(){
+
+
+        $this -> db -> select('qty_received, qty_delivered');
+        $this -> db -> from('item_total');
+        $this -> db -> where('product_id', $_POST["id"]);
+        $this -> db -> limit(1);
+
+        $query = $this->db->get();
+        $query = $query->result();
+        
+        if($query){            
+            $data = array(
+            'product_id' => $this->input->post('id'),
+            'qty_received' => $query[0]->qty_received+$this->input->post('qty_received'),
+            'qty_delivered' => $query[0]->qty_delivered+$this->input->post('qty_delivered'),
+            );
+
+            $this->db->where('product_id', $_POST["id"]);
+            return $this->db->update('item_total', $data);
+
+        }else{
+
+             $data = array(
+            'product_id' => $this->input->post('id'),
+            'qty_received' => 0+$this->input->post('qty_received'),
+            'qty_delivered' => 0+$this->input->post('qty_delivered'),
+            );
+
+            return $this->db->insert('item_total', $data);
+
+        }
+
+    }
+
     function jointable($get ,$table1, $table2, $joinid, $join){
         $this->db->select($get);
         $this->db->from($table1);

@@ -32,7 +32,7 @@
             <li><a href="<?= base_url()?>admin/products"><i class="fa fa-circle-o"></i>View Products</a></li>
           </ul>          
         </li>
-            <li><a href="<?= base_url()?>admin/products"><i class="fa fa-circle-o"></i>Inventory</a></li>
+            <li><a href="<?= base_url()?>admin/inventory"><i class="fa fa-circle-o"></i>Inventory</a></li>
             <li><a href="<?= base_url()?>admin/products"><i class="fa fa-circle-o"></i>Customers</a></li>
             <li><a href="<?= base_url()?>admin/products"><i class="fa fa-circle-o"></i>Orders</a></li>            
       </ul>
