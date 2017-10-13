@@ -72,13 +72,12 @@ $route['login']							= 'main/login';
 
 $route['register']						= 'user/register';
 
-$route['(:any)']						= 'main/view/$1'; 
+$route['(:any/)']						= 'main/view/$1'; 
 
 $route['default_controller']			= 'main/view';
 $route['404_override']					= 'errors/404.php';
 $route['translate_uri_dashes']			= FALSE;
 */
-
-$route['default_controller'] = 'main/view';
-$route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+$route['default_controller']            = 'Main';
+$route['404_override']                  = 'Main/error';
+$route['translate_uri_dashes']          = FALSE;
