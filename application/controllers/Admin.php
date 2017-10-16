@@ -135,7 +135,8 @@ class Admin extends MY_Controller
             );
 
 
-            $this->product_model->insertdata($table = "item_received", $data);
+            if($this->product_model->insertdata($table = "item_received", $data)){
+
 
             $this->product_model->update_stock();
 
@@ -145,10 +146,19 @@ class Admin extends MY_Controller
                             </button>Successfully Added. </div>');
 
             redirect('admin/inventory');
-
+                }
+            }
         }
-        }
 
+
+
+
+
+        //view sa add product
+    public function customers(){
+        $data["customer"] = $this->product_model->fetchdata("users", array('user_type' => 'customer'));
+         parent::admin_page('customers', $data);
+        }
 
     /*********                ********/
     function image_upload(){
