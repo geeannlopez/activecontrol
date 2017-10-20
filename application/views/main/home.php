@@ -33,9 +33,7 @@ _________________________________________________________ -->
                             <p>
                                 <img src="<?=base_url()?>assets/img/logo-aces.png" alt="">
                             </p>
-                            <h1>Multipurpose responsive theme</h1>
-                            <p>Business. Corporate. Agency.
-                                <br />Portfolio. Blog. E-commerce.</p>
+                            <h1>Active Control and Engineering Supplies</h1>
                         </div>
                         <div class="col-sm-7">
                             <img class="img-responsive" src="<?=base_url()?>images/1.jpg" alt="">
@@ -120,7 +118,7 @@ _________________________________________________________ -->
                         <img src="<?=base_url()?>images/esi.jpg" alt="" class="img-responsive principals">
                     </li>
                     <li class="item">
-                        <img src="<?=base_url()?>/assets/img/customer-5.png" alt="" class="img-responsive">
+                        <img src="<?=base_url()?>images/chelic.png" alt="" class="img-responsive principals">
                     </li>
                     <li class="item">
                         <img src="<?=base_url()?>/assets/img/customer-6.png" alt="" class="img-responsive">

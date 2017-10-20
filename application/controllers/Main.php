@@ -7,6 +7,7 @@ class Main extends MY_Controller
         parent::__construct();
         // $this->load->helper('encryptor');
         $this->load->model('user_model');
+        $this->load->model('product_model');
 
         if($this->user->info('user_type') == 'admin'){
             redirect('/admin');
@@ -17,6 +18,20 @@ class Main extends MY_Controller
 
     public function index(){
         parent::main_page('home');
+    }
+    
+    public function products(){
+        $category_id = $this->uri->segment(3);
+
+        $data["category"] = $this->product_model->fetchdata("product_category", array('status' => 1));
+
+        if ($category_id){
+            $data["products"] = $this->product_model->fetchdata("products", array('status' => 1, 'prod_category' => $category_id));
+        }else{
+            $data["products"] = $this->product_model->fetchdata("products", NULL);
+        }
+
+        parent::main_page('products', $data);
     }
 
     function register(){
