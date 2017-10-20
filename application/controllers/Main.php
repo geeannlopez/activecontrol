@@ -26,9 +26,9 @@ class Main extends MY_Controller
         $data["category"] = $this->product_model->fetchdata("product_category", array('status' => 1));
 
         if ($category_id){
-            $data["products"] = $this->product_model->fetchdata("products", array('status' => 1, 'prod_category' => $category_id));
+            $data["products"] = $this->product_model->jointable1(array('status' => 1, 'prod_category' => $category_id));
         }else{
-            $data["products"] = $this->product_model->fetchdata("products", NULL);
+            $data["products"] = $this->product_model->jointable('*', 'products', 'item_total', 'products.prod_id = item_total.product_id', 'left');
         }
 
         parent::main_page('products', $data);
@@ -166,6 +166,50 @@ class Main extends MY_Controller
         }
     }
      */
+
+
+//SHOPPING CART
+    public function add()
+    {
+    
+        $insert_room = array(
+            'id' => $this->input->post('id'),
+            'name' => $this->input->post('name'),
+            'price' => $this->input->post('price'),
+            'qty' => 1
+        );      
+
+        $this->cart->insert($insert_room);
+            
+        redirect('Main/products');
+    }
+    
+    function remove($rowid) {
+        if ($rowid=="all"){
+            $this->cart->destroy();
+        }else{
+            $data = array(
+                'rowid'   => $rowid,
+                'qty'     => 0
+            );
+
+            $this->cart->update($data);
+        }
+        
+        redirect('Main/products');
+    }   
+
+    function update_cart(){
+        foreach($_POST['cart'] as $id => $cart)
+        {           
+            $price = $cart['price'];
+            $amount = $price * $cart['qty'];
+            
+            $this->product_model->update_cart($cart['rowid'], $cart['qty'], $price, $amount);
+        }
+        
+        redirect('Main/products');
+    }   
 
     public function error(){
         parent::main_page('404');

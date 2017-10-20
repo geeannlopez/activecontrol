@@ -69,7 +69,8 @@ $(function(){
               </table>
             </div>
             <!-- /.box-body -->
-
+</section>
+</div>
 
 <!-- Add Modal -->
 <div id="add" class="modal fade" role="dialog">
@@ -123,15 +124,9 @@ $(function(){
       <div class="modal-footer">
                 <button type="submit" class="btn btn-success pull-right">Add</button>
               </div>
-      </div>
           </form>
+        </div>
     </div>
 
   </div>
 </div>
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-

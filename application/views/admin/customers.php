@@ -11,7 +11,7 @@ img{
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Product List
+        Customers
                 <a href="<?= base_url()?>admin/add_product"><button class="pull-right btn btn-success add" type="button" >+</button></a>
       </h1>
     </section>
@@ -48,7 +48,15 @@ img{
                       }?>         
                   </td>
                   <td>
-                <button class="btn btn btn-xs pull-right edit">EDIT</button><button></button></a></td>
+                    <?php if ($i->user_status == 1){ ?>
+                    <a href="<?= base_url()?>Admin/deactivate_user/<?=$i->user_id?>/deactivate">
+                    <button class="btn btn btn-xs pull-right edit">Deactivate</button></a>
+                    <?php }else{ ?>
+                    <a href="<?= base_url()?>Admin/deactivate_user/<?=$i->user_id?>/activate">
+                    <button class="btn btn btn-xs pull-right edit">Activate</button></a>
+
+                 <?php  } ?>
+                  </td>
                 </tr>
                 <?php } ?>
                 </tbody>

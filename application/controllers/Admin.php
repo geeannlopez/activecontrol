@@ -61,6 +61,9 @@ class Admin extends MY_Controller
 
        //view sa list ng products
     public function products(){
+
+        $data["category"] = $this->product_model->fetchdata("product_category", NULL);
+
             $data["products"] = $this->product_model->jointable('*, products.status status', 'products', 'product_category', 'products.prod_category = product_category.category_id', 'left');
          parent::admin_page('products', $data);
         }
@@ -68,7 +71,7 @@ class Admin extends MY_Controller
     public function a_product(){
 
         $this->form_validation->set_rules('name', 'Product Name', 'trim|required|max_length[30]|is_unique[products.prod_name]');
-        $this->form_validation->set_rules('price', 'Price', 'trim|required|decimal');
+        $this->form_validation->set_rules('price', 'Price', 'trim|required');
         $this->form_validation->set_rules('description', 'Description', 'trim|required|min_length[6]');
         $this->form_validation->set_rules('category', 'Category', 'required');
         $this->form_validation->set_rules('image', 'Image', 'callback_image_upload');
@@ -80,9 +83,12 @@ class Admin extends MY_Controller
         }else{
             if($_POST["action"] == "add"){
 
-            $upload_data = $this->upload->data(); //Returns array of containing all of the data related to the file you uploaded.
+            if ($_FILES['image']['size'] != 0){ //Returns array of containing all of the data related to the file you uploaded.
+            $upload_data = $this->upload->data();
             $file_name = $upload_data['file_name'];
-
+            }else{
+            $file_name = 'default.jpg';
+            }
             $data = array(
             'prod_name' => $this->input->post('name'),
             'prod_price' => $this->input->post('price'),
@@ -100,6 +106,47 @@ class Admin extends MY_Controller
 
             redirect('admin/add_product');
          }
+        }
+ 
+    }
+
+        public function edit_product(){
+
+        $this->form_validation->set_rules('name', 'Product Name', 'trim|required|max_length[30]');
+        $this->form_validation->set_rules('price', 'Price', 'trim|required');
+        $this->form_validation->set_rules('description', 'Description', 'trim|required|min_length[6]');
+        $this->form_validation->set_rules('image', 'Image', 'callback_image_upload');
+
+        if ($this->form_validation->run() == FALSE){
+
+            $this->products();
+
+        }else{
+
+
+            $data = array(
+            'prod_name' => $this->input->post('name'),
+            'prod_price' => $this->input->post('price'),
+            'prod_desc' => $this->input->post('description'),
+          //  'prod_category' => $this->input->post('category')
+            );
+
+
+            if ($_FILES['image']['size'] != 0){ //Returns array of containing all of the data related to the file you uploaded.
+            $upload_data = $this->upload->data();
+            $file_name = $upload_data['file_name'];
+            $data['prod_image']=$file_name;
+            }
+
+            $this->product_model->updatedata($table = "products", $data, array('prod_id' => $this->input->post('id')));
+
+            
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                            </button>Successfully Updated. </div>');
+
+            redirect('admin/products');
+   
         }
  
     }
@@ -151,6 +198,36 @@ class Admin extends MY_Controller
         }
 
 
+        //deactivate
+    public function deactivate_user(){
+        $id = $this->uri->segment(3);
+        $status = $this->uri->segment(4);
+        
+
+        if($status == 'deactivate'){
+        $data["customer"] =  $this->product_model->updatedata($table = "users",  array('user_status' => 0 ), $where = array('user_id' => $id ));
+        }else{
+
+        $data["customer"] =  $this->product_model->updatedata($table = "users",  array('user_status' => 1 ), $where = array('user_id' => $id ));
+
+        }
+         redirect('Admin/customers');
+        } 
+
+
+    public function deactivate_prod(){
+        $id = $this->uri->segment(3);
+        $status = $this->uri->segment(4);
+        
+
+        if($status == 'deactivate'){
+            $this->product_model->updatedata($table = "products",  array('status' => 0 ), $where = array('prod_id' => $id ));
+        }else{
+            $this->product_model->updatedata($table = "products",  array('status' => 1 ), $where = array('prod_id' => $id ));
+
+        }
+         redirect('Admin/products');
+        }        
 
 
 
@@ -162,7 +239,7 @@ class Admin extends MY_Controller
 
     /*********                ********/
     function image_upload(){
-          if($_FILES['image']['size'] != 0){
+         if($_FILES['image']['size'] != 0){
             $upload_dir = './images/';
             if (!is_dir($upload_dir)) {
              mkdir($upload_dir);
@@ -170,7 +247,7 @@ class Admin extends MY_Controller
             $config['upload_path']   = $upload_dir;
             $config['allowed_types'] = 'gif|jpg|png|jpeg';
             $config['file_name']     = $_POST["name"];
-            $config['overwrite']     = true;
+            $config['overwrite']     = false;
             $config['max_size']      = '5120';
 
             $this->load->library('upload', $config);
@@ -184,8 +261,7 @@ class Admin extends MY_Controller
             }   
         }   
         else{
-            $this->form_validation->set_message('image_upload', "No file selected");
-            return false;
+            return true;
         }
     }
 
