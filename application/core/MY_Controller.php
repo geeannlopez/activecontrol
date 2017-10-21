@@ -11,10 +11,10 @@ class MY_Controller	extends CI_Controller
 		// $this->load->model('crud_model');
 	}
 
-	function main_page($location){
+	function main_page($location, $data = NULL){
         $this->load->view('main/includes/header');
         $this->load->view('main/includes/navbar');
-		$this->load->view('main/'.$location);	
+		$this->load->view('main/'.$location, $data);	
         $this->load->view('main/includes/footer');
 	}
 	function cust_page($location){

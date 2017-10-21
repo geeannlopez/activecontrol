@@ -52,7 +52,7 @@
                                     <input type="text" class="form-control" id="email" name="email">
                                 </div>
                                 <div class="form-group">
-                                    <label for="birthday">Birthday</label>
+                                    <label for="birthday">Date of Birth</label>
                                     <input type="date" class="form-control" id="birthday" name="birthday">
                                 </div>
                                 <div class="form-group">

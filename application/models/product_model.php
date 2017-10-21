@@ -68,6 +68,33 @@ class product_model extends CI_Model
 
         return $query->result();
 
+
+    }
+
+    function jointable1($data){
+            $this->db->select('*');
+            $this->db->from('products');
+            $this->db->join('item_total', 'products.prod_id = item_total.product_id', 'left');
+            $this->db->where($data);
+
+            $query = $this->db->get();
+        return $query->result();
+    }
+
+
+
+    //CART
+
+
+    function update_cart($rowid, $qty, $price, $amount) {
+        $data = array(
+            'rowid'   => $rowid,
+            'qty'     => $qty,
+            'price'   => $price,
+            'amount'   => $amount
+        );
+
+        $this->cart->update($data);
     }
 
 }
