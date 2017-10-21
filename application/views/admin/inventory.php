@@ -5,8 +5,24 @@ $(document).ready(function(){
     var name = $(this).data('name');
        $(".id").val(id);
        $(".name").val(name);
-});
+
+    });
    });
+
+$(function(){
+    var dtToday = new Date();
+    
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    
+    var maxDate = year + '-' + month + '-' + day;
+    $('.invoicedate').attr('max', maxDate);
+});
 </script>
  
 
@@ -53,7 +69,8 @@ $(document).ready(function(){
               </table>
             </div>
             <!-- /.box-body -->
-
+</section>
+</div>
 
 <!-- Add Modal -->
 <div id="add" class="modal fade" role="dialog">
@@ -107,15 +124,9 @@ $(document).ready(function(){
       <div class="modal-footer">
                 <button type="submit" class="btn btn-success pull-right">Add</button>
               </div>
-      </div>
           </form>
+        </div>
     </div>
 
   </div>
 </div>
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-

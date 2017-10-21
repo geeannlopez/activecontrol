@@ -78,23 +78,23 @@ $(document).ready(function(){
             </div> 
 
             <!-- /.box-header -->
-            <div class="box-body" style="width: 75%; margin: 0 auto">
+            <div class="box-body" style="width: 50%; margin: 0 auto">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Status</th>
+                  <th> </th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php foreach ($category as $i) { ?>
                 <tr>
                   <td><?= $i->category_name; ?></td>
-                  <td><?php if ($i->status == 1){
+                  <td><!-- <?php if ($i->status == 1){
                       echo "enabled";
                     }else{
                       echo "disabled";
-                      }?>
+                      }?> -->
                   <button class="btn btn btn-xs pull-right edit" data-id="<?= $i->category_id ?>" data-name="<?= $i->category_name ?>">EDIT</button></td>
                 </tr>
                 <?php } ?>
