@@ -19,6 +19,10 @@ $(document).ready(function(){
        $(".desc").val(desc);
 
     });
+
+       $('#example1').DataTable( {
+        "order": [[ 5, "desc" ]]
+    } );
    });  
 </script>
 

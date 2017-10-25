@@ -20,6 +20,9 @@ class Admin extends MY_Controller
         parent::admin_page('page');
     }
 
+
+    /*******************CATEGORY********************/
+
     //view sa category
     public function category(){
         $data["category"] = $this->product_model->fetchdata("product_category", NULL);
@@ -27,7 +30,7 @@ class Admin extends MY_Controller
     }
 
     public function a_category(){
-        $this->form_validation->set_rules('name', 'Category', 'trim|alpha|required|min_length[3]|max_length[30]|is_unique[product_category.category_name]');
+        $this->form_validation->set_rules('name', 'Category', 'trim|required|min_length[3]|max_length[30]');
 
         if ($this->form_validation->run() == FALSE){
             $this->category();
@@ -52,6 +55,11 @@ class Admin extends MY_Controller
         redirect('admin/category');
         }
     }
+
+    /*******************END CATEGORY********************/
+
+
+    /*******************PRODUCTS********************/
 
         //view sa add product
     public function add_product(){
@@ -99,7 +107,6 @@ class Admin extends MY_Controller
 
             $this->product_model->insertdata($table = "products", $data);
 
-            
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible" role="alert">
                             <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
                             </button>Successfully Added. </div>');
@@ -152,7 +159,11 @@ class Admin extends MY_Controller
     }
 
 
-        //view sa add product
+    /*******************END PRODUCT********************/
+
+    /*******************INVENTORY********************/
+
+        //view sa inventory
     public function inventory(){
             $data["products"] = $this->product_model->jointable('*', 'products', 'item_total', 'products.prod_id = item_total.product_id', 'left');
          parent::admin_page('inventory', $data);
@@ -197,6 +208,164 @@ class Admin extends MY_Controller
             }
         }
 
+    /*******************END INVENTORY********************/
+
+    /*******************USER ACCOUNTS********************/
+
+
+    public function profile(){
+        $data["profile"] = $this->product_model->fetchdata("users", array('user_id' => $this->user->info('user_id')));
+
+        parent::admin_page('profile', $data);
+    }
+
+        //view sa customers
+    public function update_profile(){
+         $this->form_validation->set_rules('name', 'Full Name', 'trim|required|min_length[3]|max_length[30]');
+        $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email');
+        $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required');
+        $this->form_validation->set_rules('contact', 'Contact Number', 'trim|required|numeric');
+        $this->form_validation->set_rules('address', 'Address', 'trim|required');
+
+
+        $data["profile"] = $this->product_model->fetchdata("users", array('user_id' => $this->user->info('user_id')));
+        if ($this->form_validation->run() == FALSE)        {
+            // fails
+            $this->profile();
+        
+        }else{
+            //insert the user registration details into database
+            $data = array(
+                'user_name' => $this->input->post('name'),
+                'user_email' => $this->input->post('email'),
+                'user_bday' => $this->input->post('birthday'),
+                'user_contactno' => $this->input->post('contact'),
+                'user_address' => $this->input->post('address'),
+                'user_pass' => md5($this->input->post('password')),
+                'user_type' => 'admin'
+            );
+
+            //insert form data into database
+
+            if($this->user_model->updatedata($table = "users",  $data, $where = array('user_id' => $this->user->info('user_id')))){
+                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                            </button>Successfully updated. </div>');
+                redirect('Admin/profile');
+            }else{
+                $this->session->set_flashdata('message', '<div  class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-    hidden="true">×</span><span class="sr-only">Close</span>
+                            </button>Unable to register.</div>');
+                redirect('Admin/profile');
+            }
+
+        }
+    }
+
+        public function changepass(){
+         $this->form_validation->set_rules('oldpass', 'Current Password', 'required|callback_checkpassword');
+        $this->form_validation->set_rules('newpass', 'New Password', 'required|min_length[6]');
+        $this->form_validation->set_rules('cnewpass', 'Confirm Password', 'required|matches[password]');
+
+        if ($this->form_validation->run() == FALSE)        {
+            // fails
+            
+            $this->profile();
+        }else{
+            //insert the user registration details into database
+            $data = array(
+                'user_pass' => $_POST['password']
+            );
+
+            //insert form data into database
+
+            if($this->user_model->updatedata($table = "users",  $data, $where = array('user_id' => $this->user->info('user_id')))){
+                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                            </button>Successfully updated. </div>');
+                redirect('Admin/profile');
+            }else{
+                $this->session->set_flashdata('message', '<div  class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-    hidden="true">×</span><span class="sr-only">Close</span>
+                            </button>Unable to register.</div>');
+                redirect('Admin/profile');
+            }
+
+        }
+    }
+
+    public function customers(){
+        $data["customer"] = $this->product_model->fetchdata("users", array('user_type' => 'customer'));
+         parent::admin_page('customers', $data);
+
+         $this->session->set_userdata('referred_from', current_url());
+        }
+
+    public function staff(){
+        $data["staff"] = $this->product_model->fetchdata("users", array('user_type' => 'admin'));
+         parent::admin_page('staff', $data);
+
+        $this->session->set_userdata('referred_from', current_url());
+        }
+
+    public function add_staff(){
+
+         parent::admin_page('add_staff');
+
+        $this->session->set_userdata('referred_from', current_url());
+        }
+
+
+    public function register_staff(){
+        //set validation rules
+        $this->form_validation->set_rules('name', 'Full Name', 'trim|required|min_length[3]|max_length[30]');
+        $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email|is_unique[users.user_email]');
+        $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required');
+        $this->form_validation->set_rules('contact', 'Contact Number', 'trim|required|numeric');
+        $this->form_validation->set_rules('address', 'Address', 'trim|required');
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+        $this->form_validation->set_rules('cpassword', 'Confirm Password', 'required|matches[password]');
+
+        //validate form input
+        if ($this->form_validation->run() == FALSE)        {
+            // fails
+            $this->add_staff();
+        }
+        else
+        {
+            //insert the user registration details into database
+            $data = array(
+                'user_name' => $this->input->post('name'),
+                'user_email' => $this->input->post('email'),
+                'user_bday' => $this->input->post('birthday'),
+                'user_contactno' => $this->input->post('contact'),
+                'user_address' => $this->input->post('address'),
+                'user_pass' => md5($this->input->post('password')),
+                'user_type' => 'admin'
+            );
+
+            // insert form data into database
+            if($this->user_model->insertUser($data)){
+                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                            </button>Successfully registered. </div>');
+                redirect('Admin/add_staff');
+            }else{
+                $this->session->set_flashdata('message', '<div  class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-    hidden="true">×</span><span class="sr-only">Close</span>
+                            </button>Unable to register.</div>');
+                redirect('Admin/add_staff');
+            }
+
+        }
+    }
+
+
+    /*******************END USER ACCOUNTS********************/
+
+
+    /*************DEACTIVATE, WLANAG GINAGALAW**************/
+
 
         //deactivate
     public function deactivate_user(){
@@ -205,13 +374,15 @@ class Admin extends MY_Controller
         
 
         if($status == 'deactivate'){
-        $data["customer"] =  $this->product_model->updatedata($table = "users",  array('user_status' => 0 ), $where = array('user_id' => $id ));
+        $data["customer"] =  $this->user_model->updatedata($table = "users",  array('user_status' => 0 ), $where = array('user_id' => $id ));
         }else{
 
-        $data["customer"] =  $this->product_model->updatedata($table = "users",  array('user_status' => 1 ), $where = array('user_id' => $id ));
+        $data["customer"] =  $this->user_model->updatedata($table = "users",  array('user_status' => 1 ), $where = array('user_id' => $id ));
 
         }
-         redirect('Admin/customers');
+       
+        $referred_from = $this->session->userdata('referred_from');
+        redirect($referred_from, 'refresh');
         } 
 
 
@@ -231,13 +402,21 @@ class Admin extends MY_Controller
 
 
 
-        //view sa add product
-    public function customers(){
-        $data["customer"] = $this->product_model->fetchdata("users", array('user_type' => 'customer'));
-         parent::admin_page('customers', $data);
-        }
+    /*************END DEACTIVATE**************/
 
     /*********                ********/
+    function checkpassword(){
+
+        if (md5($_POST['oldpass']) == $this->user->info('user_pass')){
+
+             return true;
+            }   
+            else{
+                $this->form_validation->set_message('checkpassword', "Incorrect Password");
+                return false;
+            }   
+    }
+
     function image_upload(){
          if($_FILES['image']['size'] != 0){
             $upload_dir = './images/';

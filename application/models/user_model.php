@@ -17,6 +17,12 @@ class user_model extends CI_Model
         return $query->row();
     }
 
+    function updatedata($table, $data, $where){
+        $this->db->where($where);
+        return $this->db->update($table, $data); 
+
+    }
+
     function login($email, $password){
         $this -> db -> select('*');
         $this -> db -> from('users');

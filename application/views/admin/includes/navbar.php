@@ -32,9 +32,21 @@
             <li><a href="<?= base_url()?>admin/products"><i class="fa fa-circle-o"></i>View Products</a></li>
           </ul>          
         </li>
-            <li><a href="<?= base_url()?>admin/inventory"><i class="fa fa-circle-o"></i>Inventory</a></li>
-            <li><a href="<?= base_url()?>admin/customers"><i class="fa fa-circle-o"></i>Customers</a></li>
-            <li><a href="<?= base_url()?>admin/products"><i class="fa fa-circle-o"></i>Orders</a></li>            
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-book"></i> <span>User Accounts</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+                </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?= base_url()?>admin/customers"><i class="fa fa-circle-o"></i>View Customers</a></li>
+            <li><a href="<?= base_url()?>admin/staff"><i class="fa fa-circle-o"></i>View Staffs</a></li>
+            <li><a href="<?= base_url()?>admin/add_staff"><i class="fa fa-circle-o"></i>Register Staff</a></li>
+          </ul>          
+        </li>
+            <li><a href="<?= base_url()?>admin/inventory"><i class="fa fa-circle-o"></i><span>Inventory</span></a></li>
+            <li><a href="<?= base_url()?>admin/products"><i class="fa fa-circle-o"></i><span>Orders</span></a></li>            
       </ul>
       <!-- /.sidebar-menu -->
     </section>

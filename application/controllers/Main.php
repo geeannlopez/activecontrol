@@ -9,11 +9,6 @@ class Main extends MY_Controller
         $this->load->model('user_model');
         $this->load->model('product_model');
 
-        if($this->user->info('user_type') == 'admin'){
-            redirect('/admin');
-        }else if($this->user->info('user_type') == 'customer'){
-            redirect('/customer');
-        }
     }
 
     public function index(){
@@ -31,12 +26,13 @@ class Main extends MY_Controller
             $data["products"] = $this->product_model->jointable('*', 'products', 'item_total', 'products.prod_id = item_total.product_id', 'left');
         }
 
+
         parent::main_page('products', $data);
     }
 
     function register(){
         //set validation rules
-        $this->form_validation->set_rules('name', 'Full Name', 'trim|alpha|required|min_length[3]|max_length[30]');
+        $this->form_validation->set_rules('name', 'Full Name', 'trim|required|min_length[3]|max_length[30]');
         $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email|is_unique[users.user_email]');
         $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required');
         $this->form_validation->set_rules('contact', 'Contact Number', 'trim|required|numeric');
@@ -77,6 +73,41 @@ class Main extends MY_Controller
         }
     }
 
+
+
+    public function shoppingcart(){
+
+
+        parent::main_page('shoppingcart');
+    }
+
+    public function checkout_shipping(){
+
+        parent::main_page('checkout-info');
+    }
+
+/************** VALIDATIONS ***************/
+
+    function login_checkout()
+    {
+
+        $this->form_validation->set_rules('email', 'Email Address', 'trim|required');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|callback_check_database');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            //Field validation failed.  User redirected to login page
+            
+           $this->shoppingcart();
+        }
+        else
+        {
+            //Go to private area
+            
+            redirect('Main/shoppingcart');
+        }
+
+    }
     
     function verify_login()
     {
@@ -105,7 +136,8 @@ class Main extends MY_Controller
 
         //query the database
         $result = $this->user_model->login($email, $password);
-        if($result)
+        if($result){
+        if($result[0]->user_status == 1)
         {
             $sess_array = array();
             foreach($result as $row)
@@ -118,6 +150,11 @@ class Main extends MY_Controller
                 $this->session->set_userdata('logged_in', $sess_array);
             }
             return TRUE;
+        }
+        else{
+            $this->form_validation->set_message('check_database', 'Your account has been disabled.');
+            return false;        
+        }
         }
         else
         {
@@ -209,7 +246,50 @@ class Main extends MY_Controller
         }
         
         redirect('Main/products');
+    }  
+
+ //SHOPPING CART
+    public function add_s()
+    {
+    
+        $insert_room = array(
+            'id' => $this->input->post('id'),
+            'name' => $this->input->post('name'),
+            'price' => $this->input->post('price'),
+            'qty' => 1
+        );      
+
+        $this->cart->insert($insert_room);
+            
+        redirect('Main/shoppingcart');
+    }
+    
+    function remove_s($rowid) {
+        if ($rowid=="all"){
+            $this->cart->destroy();
+        }else{
+            $data = array(
+                'rowid'   => $rowid,
+                'qty'     => 0
+            );
+
+            $this->cart->update($data);
+        }
+        
+        redirect('Main/shoppingcart');
     }   
+
+    function update_cart_s(){
+        foreach($_POST['cart'] as $id => $cart)
+        {           
+            $price = $cart['price'];
+            $amount = $price * $cart['qty'];
+            
+            $this->product_model->update_cart($cart['rowid'], $cart['qty'], $price, $amount);
+        }
+        
+        redirect('Main/shoppingcart');
+    }      
 
     public function error(){
         parent::main_page('404');
