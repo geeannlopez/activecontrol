@@ -14,12 +14,12 @@ _________________________________________________________ -->
                             </p>
                         </div>
                         <div class="col-xs-7">
-                            <div class="social">
+                            <!-- <div class="social">
                                 <a href="#" class="external facebook" data-animate-hover="pulse"><i class="fa fa-facebook"></i></a>
                                 <a href="#" class="external gplus" data-animate-hover="pulse"><i class="fa fa-google-plus"></i></a>
                                 <a href="#" class="external twitter" data-animate-hover="pulse"><i class="fa fa-twitter"></i></a>
                                 <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
-                            </div>
+                            </div> -->
 
                             <div class="login">
                                 <a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign in</span></a>
@@ -60,16 +60,16 @@ _________________________________________________________ -->
 
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle">ABOUT</a>
+                                    <a href="<?=base_url()?>" class="dropdown-toggle">ABOUT</a>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle">ABOUT</a>
+                                    <a href="<?=base_url()?>" class="dropdown-toggle">PRODUCTS</a>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle">CONTACT</a>
+                                    <a href="<?=base_url()?>#principals" class="dropdown-toggle">OUR PRINCIPALS</a>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle">CONTACT</a>
+                                    <a href="<?=base_url()?>" class="dropdown-toggle">CONTACT</a>
                                 </li>
 
                             </ul>
