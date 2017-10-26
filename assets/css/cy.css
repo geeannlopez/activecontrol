@@ -47,4 +47,38 @@
     .modal-content .text-muted a {
       color: #2b2b2b !important; }
 
+/* PRODUCTS */
+.nav-stacked > li {
+  float: none;
+  font-size: 12px; }
+
+.the_cart {
+  position: sticky;
+  top: 80px;
+  z-index: 1000; }
+  .the_cart h3 {
+    border-left: 5px solid #6aae7a;
+    padding-left: 10px; }
+
+table {
+  margin: 0;
+  width: 100%;
+  background-color: #6aae7a; }
+
+td {
+  padding: 10px 6px;
+  font-size: 12px;
+  text-align: center;
+  color: black; }
+  td input[type="number"] {
+    background-color: white;
+    border: none;
+    padding-left: 5px; }
+  td input[type="button"], td input[type="submit"] {
+    height: 25px;
+    background-color: white;
+    border: none; }
+  td a {
+    color: red; }
+
 /*# sourceMappingURL=cy.css.map */

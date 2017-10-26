@@ -63,7 +63,7 @@ _________________________________________________________ -->
                                     <a href="<?=base_url()?>" class="dropdown-toggle">ABOUT</a>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="<?=base_url()?>" class="dropdown-toggle">PRODUCTS</a>
+                                    <a href="<?=base_url()?>main/products" class="dropdown-toggle">PRODUCTS</a>
                                 </li>
                                 <li class="dropdown">
                                     <a href="<?=base_url()?>#principals" class="dropdown-toggle">OUR PRINCIPALS</a>
