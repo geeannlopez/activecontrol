@@ -3,7 +3,7 @@ function clear_cart() {
     var result = confirm('Are you sure want to clear all bookings?');
     
     if(result) {
-        window.location = "<?php echo base_url(); ?>Main/remove/all";
+        window.location = "<?php echo base_url(); ?>main/remove/all";
     }else{
         return false; // cancel button
     }
@@ -56,9 +56,9 @@ function clear_cart() {
                     <div class="col-sm-9">
 
 
-<table border="0" align="center" cellpadding="5px" cellspacing="1px" style="font-family:Verdana, Geneva, sans-serif; font-size:11px; background-color:#E1E1E1" width="50%">
+<table border="0" align="center" cellpadding="5px" cellspacing="1px">
         <?php if ($cart = $this->cart->contents()): ?>
-        <tr bgcolor="#FFFFFF" style="font-weight:bold">
+        <tr style="font-weight:bold">
             <td>Item</td>
             <td>Name</td>
             <td>Price</td>
@@ -67,7 +67,7 @@ function clear_cart() {
             <td>Options</td>
         </tr>
         <?php
-        echo form_open('Main/update_cart');
+        echo form_open('main/update_cart');
         $grand_total = 0; $i = 1;
         
         foreach ($cart as $item):
@@ -77,7 +77,7 @@ function clear_cart() {
             echo form_hidden('cart['. $item['id'] .'][price]', $item['price']);
             echo form_hidden('cart['. $item['id'] .'][qty]', $item['qty']);
         ?>
-        <tr bgcolor="#FFFFFF">
+        <tr>
             <td>
                 <?php echo $i++; ?>
             </td>
@@ -88,14 +88,25 @@ function clear_cart() {
                 $ <?php echo number_format($item['price'],2); ?>
             </td>
             <td>
-                <?php echo form_input('cart['. $item['id'] .'][qty]', $item['qty'], 'maxlength="3" size="1" style="text-align: right"'); ?>
+               
+              <?php
+                $data = array(
+                    'type'  => 'number',
+                    'name'  => 'cart['. $item['id'] .'][qty]',
+                    'value' => $item["qty"],
+                    'size'  => '1',
+                    'min'   => '1',
+                    'style' => 'width: 50px;'
+                   );
+
+                 echo form_input($data); ?> 
             </td>
             <?php $grand_total = $grand_total + $item['subtotal']; ?>
             <td>
                 $ <?php echo number_format($item['subtotal'],2) ?>
             </td>
             <td>
-                <?php echo anchor('Main/remove/'.$item['rowid'],'Cancel'); ?>
+                <?php echo anchor('main/remove/'.$item['rowid'],'Cancel'); ?>
             </td>
             <?php endforeach; ?>
         </tr>
@@ -104,7 +115,8 @@ function clear_cart() {
             <td colspan="5" align="right"><input type="button" value="Clear Cart" onclick="clear_cart()">
                     <input type="submit" value="Update Cart">
                     <?php echo form_close(); ?>
-                    <input type="button" value="Place Order" onclick="window.location='billing'"></td>
+                    <a href="<?= base_url() ?>main/shoppingcart">
+                    <input type="button" value="Place Order"></td>
         </tr>
         <?php endif; ?>
     </table>

@@ -11,7 +11,8 @@ img{
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Customers
+        Staff
+                <a href="<?= base_url()?>admin/add_staff"><button class="pull-right btn btn-success add" type="button" >+</button></a>
       </h1>
     </section>
     <!-- Main content -->
@@ -32,7 +33,7 @@ img{
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($customer as $i) { ?>
+                <?php foreach ($staff as $i) { ?>
                 <tr>
                   <td><?= $i->user_name?></td>
                   <td><?= $i->user_bday?></td>
