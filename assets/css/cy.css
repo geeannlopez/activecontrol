@@ -47,7 +47,7 @@
     .modal-content .text-muted a {
       color: #2b2b2b !important; }
 
-/* PRODUCTS */
+/* PRODUCTS PAGE */
 .nav-stacked > li {
   float: none;
   font-size: 12px; }
@@ -80,5 +80,17 @@ td {
     border: none; }
   td a {
     color: red; }
+
+/* SHOPPING CART PAGE */
+.shopping_cart tfoot {
+  font-size: 14px; }
+.shopping_cart th {
+  color: black;
+  text-align: center;
+  background-color: #9cc8a6; }
+.shopping_cart tr:nth-child(odd) {
+  background-color: #dadada; }
+.shopping_cart tr:nth-child(even) {
+  background-color: #ebebeb; }
 
 /*# sourceMappingURL=cy.css.map */
