@@ -25,6 +25,8 @@
 
     <!-- Custom stylesheet - for your changes -->
     <link href="<?=base_url()?>/assets/css/custom.css" rel="stylesheet">
+    
+    <link href="<?=base_url()?>/assets/css/cy.css" rel="stylesheet">
 
     <!-- Responsivity for older IE -->
     <!--[if lt IE 9]>

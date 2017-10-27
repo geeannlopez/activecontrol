@@ -30,13 +30,13 @@ _________________________________________________________ -->
                 <div class="item">
                     <div class="row">
                         <div class="col-sm-5 right">
-                            <p>
-                                <img src="<?=base_url()?>assets/img/logo-aces.png" alt="">
-                            </p>
-                            <h1>Active Control and Engineering Supplies</h1>
+                            <h1>Electronics</h1>
+                            <ul class="list-style-none">
+                                <li>one of the industries we serve</li>
+                            </ul>
                         </div>
                         <div class="col-sm-7">
-                            <img class="img-responsive" src="<?=base_url()?>images/1.jpg" alt="">
+                            <img class="img-responsive" src="<?=base_url()?>assets/img/circuit.jpeg" alt="">
                         </div>
                     </div>
                 </div>
@@ -44,16 +44,13 @@ _________________________________________________________ -->
                     <div class="row">
 
                         <div class="col-sm-7 text-center">
-                            <img class="img-responsive" src="<?=base_url()?>images/2.jpg" alt="">
+                            <img class="img-responsive" src="<?=base_url()?>assets/img/power-plant.jpeg" alt="">
                         </div>
 
                         <div class="col-sm-5">
-                            <h2>46 HTML pages full of features</h2>
+                            <h1>Powerplants</h1>
                             <ul class="list-style-none">
-                                <li>Sliders and carousels</li>
-                                <li>4 Header variations</li>
-                                <li>Google maps, Forms, Megamenu, CSS3 Animations and much more</li>
-                                <li>+ 11 extra pages showing template features</li>
+                                <li>one of the industries we serve</li>
                             </ul>
                         </div>
 
@@ -62,30 +59,13 @@ _________________________________________________________ -->
                 <div class="item">
                     <div class="row">
                         <div class="col-sm-5 right">
-                            <h1>Design</h1>
+                            <h1>Shipping Companies</h1>
                             <ul class="list-style-none">
-                                <li>Clean and elegant design</li>
-                                <li>Full width and boxed mode</li>
-                                <li>Easily readable Roboto font and awesome icons</li>
-                                <li>7 preprepared colour variations</li>
+                                <li>one of the industries we serve</li>
                             </ul>
                         </div>
                         <div class="col-sm-7">
-                            <img class="img-responsive" src="<?=base_url()?>images/3.png" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="row">
-                        <div class="col-sm-7">
-                            <img class="img-responsive" src="<?=base_url()?>images/4.jpg" alt="">
-                        </div>
-                        <div class="col-sm-5">
-                            <h1>Easy to customize</h1>
-                            <ul class="list-style-none">
-                                <li>7 preprepared colour variations.</li>
-                                <li>Easily to change fonts</li>
-                            </ul>
+                            <img class="img-responsive" src="<?=base_url()?>assets/img/shipping.jpeg" alt="">
                         </div>
                     </div>
                 </div>
@@ -97,7 +77,7 @@ _________________________________________________________ -->
     <!-- *** HOMEPAGE CAROUSEL END *** -->
 </section>
 
-<section class="bar background-white no-mb">
+<section class="bar background-white no-mb" id="principals">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -130,5 +110,4 @@ _________________________________________________________ -->
         </div>
     </div>
 </section>
-
 
