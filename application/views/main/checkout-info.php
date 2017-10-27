@@ -20,8 +20,6 @@
                                 <ul class="nav nav-pills nav-justified">
                                     <li class="active"><a href="#"><i class="fa fa-eye"></i><br>Order Review</a>
                                     </li>
-                                    <li class="disabled"><a href="#"><i class="fa fa-money"></i><br>Payment Method</a>
-                                    </li>
                                 </ul>
 
 
@@ -76,7 +74,8 @@
                                             </tfoot>
                                         </table>
 
-                                    </div>
+                                    </div><br>
+
 
                                     <!-- /.row -->
 
@@ -142,15 +141,57 @@
                                 <div class="box-footer">
                                     <div class="pull-left">
                                         <a href="<?=base_url()?>main/shoppingcart" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to basket</a>
-                                    </div>
-                                    <div class="pull-right">
+                                    </div><!-- <div class="pull-right">
                                         <a href="<?= base_url()?>main/payment"><button class="btn btn-template-main">Continue to Payment<i class="fa fa-chevron-right"></i>
                                         </button>
-                                    </div>
-                                </div>
+                                    </div> -->                              <div class="pull-right" id="paypal-button-container"></div>                        </div>
                         </div>
                         <!-- /.box -->
 
+
+    <script>
+        paypal.Button.render({
+
+            env: 'sandbox', // sandbox | production
+
+            // PayPal Client IDs - replace with your own
+            // Create a PayPal app: https://developer.paypal.com/developer/applications/create
+            client: {
+                sandbox:    'AZz_iX6DRWnebjPbDO3wgTe2i-Tvbp1OLdSR6-Ia2B7iLS4peKNFo7qAx9u56mvuoZAW-Jrp84NJXIdG',
+                production: '<insert production client id>'
+            },
+
+            // Show the buyer a 'Pay Now' button in the checkout flow
+            commit: true,
+
+            // payment() is called when the button is clicked
+            payment: function(data, actions) {
+
+                // Make a call to the REST api to create the payment
+                return actions.payment.create({
+                    payment: {
+                        transactions: [
+                            {
+                                amount: { total: '100', currency: 'PHP' }
+                            }
+                        ]
+                    }
+                });
+            },
+
+            // onAuthorize() is called when the buyer approves the payment
+            onAuthorize: function(data, actions) {
+
+                // Make a call to the REST api to execute the payment
+                
+                return actions.payment.execute().then(function() {
+                    window.alert('Payment Complete!');
+                });
+            }
+
+        }, '#paypal-button-container');
+
+    </script>
 
                     </div>
                     <!-- /.col-md-9 -->
