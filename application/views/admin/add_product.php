@@ -64,6 +64,12 @@
                   </label> 
                 <input type="file" name="image"/>
                 </div>
+                 <div class="form-group">
+                  <label for="crit">
+                    Critical Level:
+                  </label>
+                  <input type="number" name="crit" min="0" class="form-control" value="<?= set_value('crit'); ?>" placeholder="Stock level to maintain">
+                </div>
                 
                 
               <!-- /.box-body -->

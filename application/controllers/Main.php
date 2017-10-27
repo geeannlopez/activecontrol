@@ -9,6 +9,9 @@ class Main extends MY_Controller
         $this->load->model('user_model');
         $this->load->model('product_model');
 
+        if($this->user->info('user_type') == 'admin' || $this->user->info('user_type') == 'superadmin'){
+            redirect('/admin');
+        }
     }
 
     public function index(){
@@ -23,7 +26,7 @@ class Main extends MY_Controller
         if ($category_id){
             $data["products"] = $this->product_model->jointable1(array('status' => 1, 'prod_category' => $category_id));
         }else{
-            $data["products"] = $this->product_model->jointable('*', 'products', 'item_total', 'products.prod_id = item_total.product_id', 'left');
+            $data["products"] = $this->product_model->jointable('*, order_line.prod_name prod_name', 'products', 'item_total', 'products.prod_id = item_total.product_id', 'left');
         }
 
 
@@ -86,6 +89,44 @@ class Main extends MY_Controller
         parent::main_page('checkout-info');
     }
 
+   public function save_order(){
+        $data = array(
+            'order_amount' => $this->cart->total() ,
+            'user_id' =>  $this->user->info('user_id')
+        );
+
+        $order_id = $this->product_model->insertorder('order_header', $data);
+
+
+        $cart  = $this->cart->contents();
+
+        if($order_id){
+        foreach ($cart as $item) {
+            $data = array(
+                'order_id' => $order_id,
+                'prod_id' => $item["id"],
+                'prod_price' => $item["price"],
+                'prod_qty' => $item["qty"],
+                'prod_name' => $item["name"],
+            );
+
+        if($this->product_model->insertdata('order_line', $data)){
+
+            $this->product_model->update_stock_1($item["id"], $item["qty"]);
+            }
+        }
+    }
+
+       redirect('main/success/'.$order_id); 
+    }
+
+
+    public function success($order_id){
+        $this->cart->destroy();
+        $data["order_id"] = $order_id;
+        parent::main_page('success', $data);
+    }
+
 /************** VALIDATIONS ***************/
 
     function login_checkout()
@@ -118,13 +159,33 @@ class Main extends MY_Controller
         if($this->form_validation->run() == FALSE)
         {
             //Field validation failed.  User redirected to login page
-            redirect('/Main');
+            $this->index();
         }
         else
         {
             //Go to private area
             
-            redirect('/customer', 'location');
+            redirect('/admin', 'location');
+        }
+
+    }
+
+        function login_registration()
+    {
+
+        $this->form_validation->set_rules('email', 'Email Address', 'trim|required');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|callback_check_database');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            //Field validation failed.  User redirected to login page
+            $this->register();
+        }
+        else
+        {
+            //Go to private area
+            
+            redirect('/admin', 'location');
         }
 
     }

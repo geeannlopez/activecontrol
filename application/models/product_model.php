@@ -12,6 +12,11 @@ class product_model extends CI_Model
 
     }
 
+  function insertorder($table, $data){
+         $this->db->insert($table, $data);
+         return $this->db->insert_id();
+    }
+
     function fetchdata($table, $where){
         $query = $this->db->get_where($table,  $where);
 
@@ -60,9 +65,54 @@ class product_model extends CI_Model
 
     }
 
+
+    function update_stock_1($id, $qty){
+
+
+        $this -> db -> select('qty_received, qty_delivered');
+        $this -> db -> from('item_total');
+        $this -> db -> where('product_id', $id);
+        $this -> db -> limit(1);
+
+        $query = $this->db->get();
+        $query = $query->result();
+        
+        if($query){            
+            $data = array(
+            'qty_delivered' => $query[0]->qty_delivered+$qty,
+            );
+
+            $this->db->where('product_id', $id);
+            return $this->db->update('item_total', $data);
+
+        }else{
+
+             $data = array(
+            'product_id' => $id,
+            'qty_received' => 0,
+            'qty_delivered' => $qty,
+            );
+
+            return $this->db->insert('item_total', $data);
+
+        }
+
+    }    
+
     function jointable($get ,$table1, $table2, $joinid, $join){
         $this->db->select($get);
         $this->db->from($table1);
+        $this->db->join($table2, $joinid, $join);
+        $query = $this->db->get();
+
+        return $query->result();
+
+
+    }
+    function jointable_where($get ,$table1, $where, $table2, $joinid, $join){
+        $this->db->select($get);
+        $this->db->from($table1);
+        $this->db->where($where);
         $this->db->join($table2, $joinid, $join);
         $query = $this->db->get();
 
@@ -74,6 +124,7 @@ class product_model extends CI_Model
     function jointable1($data){
             $this->db->select('*');
             $this->db->from('products');
+            $this->db->where('products.status', 1);
             $this->db->join('item_total', 'products.prod_id = item_total.product_id', 'left');
             $this->db->where($data);
 
