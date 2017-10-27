@@ -3,17 +3,16 @@ _________________________________________________________ -->
 
         <footer id="footer">
             <div class="container">
-                    <center>
-                    <strong><h3><font color="#60a569">ACTIVE CONTROL ENGINEERING AND SUPPLIES</font></h3></strong>
+                    
+                <strong><h3><font>ACTIVE CONTROL ENGINEERING AND SUPPLIES</font></h3></strong>
 
-                    <p>﻿Unit G Marian Bldg., 1524 Peñafrancia St. Paco Manila, Philippines <br>
-Tel nos.: +632 871-0273 / 871-0274 / 871-0873 / 781-3964 / 546-6106 / 554-9763 <br> Fax no. +632 353-8378 <br>
-Email: sales@activecontrol.com.ph
-<br></p>
-
-                    <hr>
-Copyright © 2015. All Rights Reserved.
-                    <hr class="hidden-md hidden-lg hidden-sm">
+                <p>
+                    ﻿Unit G Marian Bldg., 1524 Peñafrancia St. Paco Manila, Philippines <br>
+                    Tel nos.: +632 871-0273 / 871-0274 / 871-0873 / 781-3964 / 546-6106 / 554-9763 <br> Fax no. +632 353-8378 <br>
+                    Email: sales@activecontrol.com.ph <br>
+                </p>
+                <br>
+                <p>Copyright © 2015. All Rights Reserved.</p>
             </div>
             <!-- /.container -->
         </footer>

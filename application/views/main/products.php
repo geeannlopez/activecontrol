@@ -19,7 +19,7 @@ function clear_cart() {
                     <!-- *** LEFT COLUMN ***
       _________________________________________________________ -->
 
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
 
                         <!-- *** MENUS AND FILTERS ***
  _________________________________________________________ -->
@@ -46,80 +46,13 @@ function clear_cart() {
                         <!-- *** MENUS AND FILTERS END *** -->
 
                     </div>
-                    <!-- /.col-md-3 -->
+                    <!-- /.col-md-2 -->
 
                     <!-- *** LEFT COLUMN END *** -->
 
-                    <!-- *** RIGHT COLUMN ***
-      _________________________________________________________ -->
+                    <!-- *** MIDDLE COLUMN *** -->
 
-                    <div class="col-sm-9">
-
-
-<table border="0" align="center" cellpadding="5px" cellspacing="1px">
-        <?php if ($cart = $this->cart->contents()): ?>
-        <tr style="font-weight:bold">
-            <td>Item</td>
-            <td>Name</td>
-            <td>Price</td>
-            <td>Qty</td>
-            <td>Amount</td>
-            <td>Options</td>
-        </tr>
-        <?php
-        echo form_open('main/update_cart');
-        $grand_total = 0; $i = 1;
-        
-        foreach ($cart as $item):
-            echo form_hidden('cart['. $item['id'] .'][id]', $item['id']);
-            echo form_hidden('cart['. $item['id'] .'][rowid]', $item['rowid']);
-            echo form_hidden('cart['. $item['id'] .'][name]', $item['name']);
-            echo form_hidden('cart['. $item['id'] .'][price]', $item['price']);
-            echo form_hidden('cart['. $item['id'] .'][qty]', $item['qty']);
-        ?>
-        <tr>
-            <td>
-                <?php echo $i++; ?>
-            </td>
-            <td>
-                <?php echo $item['name']; ?>
-            </td>
-            <td>
-                $ <?php echo number_format($item['price'],2); ?>
-            </td>
-            <td>
-               
-              <?php
-                $data = array(
-                    'type'  => 'number',
-                    'name'  => 'cart['. $item['id'] .'][qty]',
-                    'value' => $item["qty"],
-                    'size'  => '1',
-                    'min'   => '1',
-                    'style' => 'width: 50px;'
-                   );
-
-                 echo form_input($data); ?> 
-            </td>
-            <?php $grand_total = $grand_total + $item['subtotal']; ?>
-            <td>
-                $ <?php echo number_format($item['subtotal'],2) ?>
-            </td>
-            <td>
-                <?php echo anchor('main/remove/'.$item['rowid'],'Cancel'); ?>
-            </td>
-            <?php endforeach; ?>
-        </tr>
-        <tr>
-            <td><b>Order Total: ₱<?php echo number_format($grand_total,2); ?></b></td>
-            <td colspan="5" align="right"><input type="button" value="Clear Cart" onclick="clear_cart()">
-                    <input type="submit" value="Update Cart">
-                    <?php echo form_close(); ?>
-                    <a href="<?= base_url() ?>main/shoppingcart">
-                    <input type="button" value="Place Order"></td>
-        </tr>
-        <?php endif; ?>
-    </table>
+                    <div class="col-sm-6">
 
                         <div class="row products">
 
@@ -151,19 +84,19 @@ function clear_cart() {
                                     <!-- /.text -->
                                   <div class="col-md-3 col-sm-3">
 
-                    <?php if ($stock > 0) {
-                        echo form_open('Main/add');
-                    echo form_hidden('id', $id);
-                    echo form_hidden('name', $name);
-                    echo form_hidden('price', $price);
-                    echo form_submit('action', 'Add to Cart', 'class="btn btn-template-main"');
-                    echo form_close();
+                                    <?php if ($stock > 0) {
+                                        echo form_open('Main/add');
+                                    echo form_hidden('id', $id);
+                                    echo form_hidden('name', $name);
+                                    echo form_hidden('price', $price);
+                                    echo form_submit('action', 'Add to Cart', 'class="btn btn-template-main"');
+                                    echo form_close();
 
-                     }else{ ?>
-                     <button class="btn btn-template-main" disabled="">Add to Cart</button>
-                    <?php }
-                    ?>
-                    <p class="text"><?= "Available: ".$stock ?></p>
+                                    }else{ ?>
+                                    <button class="btn btn-template-main" disabled="">Add to Cart</button>
+                                    <?php }
+                                    ?>
+                                    <p class="text"><?= "Available: ".$stock ?></p>
                                   </div>
                                 </div>
                                 <!-- /.product -->
@@ -202,7 +135,89 @@ function clear_cart() {
 
 
                     </div>
-                    <!-- /.col-md-9 -->
+                    <!-- /.col-md-6 -->
+
+                    <!-- *** MIDDLE COLUMN END *** -->
+
+                    <!-- *** RIGHT COLUMN *** -->
+
+
+                    <div class="col-md-4 the_cart">
+                        <h3>CART</h3>
+                        <table border="0" align="center" cellpadding="5px" cellspacing="1px">
+                            <?php if ($cart = $this->cart->contents()): ?>
+                            <tr style="font-weight:bold">
+                                <!-- <td>Item</td> -->
+                                <td>Name</td>
+                                <td>Price</td>
+                                <td>Qty</td>
+                                <td>Amount</td>
+                                <td>Options</td>
+                            </tr>
+                            <?php
+                            echo form_open('main/update_cart');
+                            $grand_total = 0; $i = 1;
+                            
+                            foreach ($cart as $item):
+                                echo form_hidden('cart['. $item['id'] .'][id]', $item['id']);
+                                echo form_hidden('cart['. $item['id'] .'][rowid]', $item['rowid']);
+                                echo form_hidden('cart['. $item['id'] .'][name]', $item['name']);
+                                echo form_hidden('cart['. $item['id'] .'][price]', $item['price']);
+                                echo form_hidden('cart['. $item['id'] .'][qty]', $item['qty']);
+                            ?>
+                            <tr>
+                                <!-- <td>
+                                    <?php echo $i++; ?>
+                                </td> -->
+                                <td>
+                                    <?php echo $item['name']; ?>
+                                </td>
+                                <td>
+                                    $ <?php echo number_format($item['price'],2); ?>
+                                </td>
+                                <td>
+                                
+                                <?php
+                                    $data = array(
+                                        'type'  => 'number',
+                                        'name'  => 'cart['. $item['id'] .'][qty]',
+                                        'value' => $item["qty"],
+                                        'size'  => '1',
+                                        'min'   => '1',
+                                        'style' => 'width: 50px;'
+                                    );
+
+                                    echo form_input($data); ?> 
+                                </td>
+                                <?php $grand_total = $grand_total + $item['subtotal']; ?>
+                                <td>
+                                    $ <?php echo number_format($item['subtotal'],2) ?>
+                                </td>
+                                <td>
+                                    <?php echo anchor('main/remove/'.$item['rowid'],'Remove'); ?>
+                                </td>
+                                <?php endforeach; ?>
+                            </tr>
+                            <tr>
+                                <td colspan="5" align="left">
+                                    <br>
+                                    <b>Order Total: ₱<?php echo number_format($grand_total,2); ?></b>
+                                </td>
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <td colspan="5" align="center">
+                                    <br>
+                                    <input type="button" value="Clear Cart" onclick="clear_cart()">
+                                    <input type="submit" value="Update Cart">
+                                    <?php echo form_close(); ?>
+                                    <a href="<?= base_url() ?>main/shoppingcart" style="color: black">
+                                    <input type="button" value="Place Order">
+                                </td>
+                            </tr>
+                            <?php endif; ?>
+                        </table>
+                    </div>
 
                     <!-- *** RIGHT COLUMN END *** -->
 
