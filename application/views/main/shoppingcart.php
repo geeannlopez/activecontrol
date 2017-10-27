@@ -45,13 +45,14 @@ function clear_cart() {
 
 
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table class="table shopping_cart">
                                         <thead>
                                             <tr>
                                                 <th colspan="2" width="300">Product</th>
                                                 <th>Quantity</th>
                                                 <th>Unit price</th>
-                                                <th colspan="2">Total</th>
+                                                <th>Total</th>
+                                                <th>Action</th>
                                            
                                             </tr>
                                         </thead>
@@ -113,7 +114,7 @@ function clear_cart() {
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th colspan="5">Total</th>
+                                                <th colspan="5" style="text-align:right">Total</th>
                                                 <th colspan="2">₱<?php echo number_format($grand_total,2); ?></th>
                                             </tr>
                                         </tfoot>
