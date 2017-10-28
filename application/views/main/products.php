@@ -31,9 +31,6 @@ function clear_cart() {
 
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked category-menu">
-                                    <li>
-                                        <a href="<?=base_url()?>main/products">All</a>
-                                    </li> 
                                   <?php foreach ($category as $i) { ?>
                                     <li>
                                         <a href="<?=base_url()?>main/products/<?=$i->category_id?>"><?= $i->category_name ?></a>
@@ -58,6 +55,7 @@ function clear_cart() {
 
 
                           <?php foreach ($products as $i) {
+
                             $id = $i->prod_id;
                             $name = $i->prod_name;
                             $price = $i->prod_price;
@@ -78,7 +76,7 @@ function clear_cart() {
                                     <div class="text"><font style="text-align: left">
                                         <h3><?= $i->prod_name ?></h3>
                                         <p><?= nl2br($i->prod_desc) ?></p>
-                                        <p class="price">P<?= $i->prod_price ?></p>
+                                        <p class="price">₱<?= $i->prod_price ?></p>
                                      </font></div>
                                     </div>
                                     <!-- /.text -->
@@ -112,7 +110,7 @@ function clear_cart() {
 
 
 
-                        <div class="pages">
+<!--                         <div class="pages">
 
 
                             <ul class="pagination">
@@ -131,7 +129,7 @@ function clear_cart() {
                                 <li><a href="#">»</a>
                                 </li>
                             </ul>
-                        </div>
+                        </div> -->
 
 
                     </div>
@@ -191,7 +189,7 @@ function clear_cart() {
                                 </td>
                                 <?php $grand_total = $grand_total + $item['subtotal']; ?>
                                 <td>
-                                    $ <?php echo number_format($item['subtotal'],2) ?>
+                                    ₱ <?php echo number_format($item['subtotal'],2) ?>
                                 </td>
                                 <td>
                                     <?php echo anchor('main/remove/'.$item['rowid'],'Remove'); ?>
@@ -211,7 +209,7 @@ function clear_cart() {
                                     <input type="button" value="Clear Cart" onclick="clear_cart()">
                                     <input type="submit" value="Update Cart">
                                     <?php echo form_close(); ?>
-                                    <a href="<?= base_url() ?>main/shoppingcart" style="color: black">
+                                    <a href="<?=base_url()?>main/checkout_shipping" style="color: black">
                                     <input type="button" value="Place Order">
                                 </td>
                             </tr>

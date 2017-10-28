@@ -10,9 +10,9 @@ class Admin extends MY_Controller
         $this->load->model('product_model');
 
         if($this->user->info('user_type') == 'customer'){
-            redirect('/customer');
+            redirect('/main');
         }else if($this->user->info('user_type') == NULL){
-            redirect('/Main');
+            redirect('/main');
         }
     }
  
@@ -84,6 +84,7 @@ class Admin extends MY_Controller
         $this->form_validation->set_rules('category', 'Category', 'required');
         $this->form_validation->set_rules('image', 'Image', 'callback_image_upload');
 
+
         if ($this->form_validation->run() == FALSE){
 
             $this->add_product();
@@ -102,7 +103,8 @@ class Admin extends MY_Controller
             'prod_price' => $this->input->post('price'),
             'prod_desc' => $this->input->post('description'),
             'prod_image' => $file_name,
-            'prod_category' => $this->input->post('category')
+            'prod_category' => $this->input->post('category'),
+            'critical_level' => $this->input->post('crit')
             );
 
             $this->product_model->insertdata($table = "products", $data);
@@ -424,7 +426,7 @@ class Admin extends MY_Controller
              mkdir($upload_dir);
             }   
             $config['upload_path']   = $upload_dir;
-            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['allowed_types'] = '*';
             $config['file_name']     = $_POST["name"];
             $config['overwrite']     = false;
             $config['max_size']      = '5120';

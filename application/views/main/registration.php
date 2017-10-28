@@ -87,8 +87,8 @@
                                 ultricies mi vitae est. Mauris placerat eleifend leo.</p>
 
                             <hr>
-
-                            <form action="customer-orders.html" method="post">
+    <?php echo form_error('password', '<font color="red">', '</font>'); ?>
+                            <form action="<?=base_url()?>main/login_registration" method="post">
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="text" class="form-control" id="email">

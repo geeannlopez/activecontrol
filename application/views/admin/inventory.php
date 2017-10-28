@@ -57,12 +57,16 @@ $(function(){
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($products as $i) { ?>
+                <?php foreach ($products as $i){
+                $stock = $i->qty_received-$i->qty_delivered;
+                 ?>
+
                 <tr>
                   <td><?=$i->prod_name?></td>
-                  <td><?= $i->qty_received-$i->qty_delivered ?></td>
+                  <td><?= $stock ?></td>
                   <td>
-                <button type="button" class="btn btn-default btn-xs add" data-toggle="modal" data-target="#add" data-id="<?=$i->prod_id?>" data-name="<?=$i->prod_name?>">Add</button>&nbsp;<button class="btn btn btn-xs">View</button></td>
+                <button type="button" class="btn btn-default btn-xs add" data-toggle="modal" data-target="#add" data-id="<?=$i->prod_id?>" data-name="<?=$i->prod_name?>">Add</button>&nbsp;<button class="btn btn btn-xs">View</button>                <?php if($stock<$i->critical_level){echo '<i class="fa fa-exclamation-circle pull-right" style="font-size:16px;color:red"></i>';} ?></td>
+
                 </tr>
                 <?php } ?>
                 </tbody>

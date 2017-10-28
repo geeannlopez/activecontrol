@@ -13,6 +13,11 @@ class MY_Controller	extends CI_Controller
 
 	function main_page($location, $data = NULL){
         $this->load->view('main/includes/header');
+        if($this->user->info('user_id')){
+			$this->load->view('main/includes/top-logout');   
+        }else{
+            $this->load->view('main/includes/top-login');    	
+        }
         $this->load->view('main/includes/navbar');
 		$this->load->view('main/'.$location, $data);	
         $this->load->view('main/includes/footer');
