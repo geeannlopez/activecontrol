@@ -131,7 +131,7 @@ class product_model extends CI_Model
             $query = $this->db->get();
         return $query->result();
     }
-
+    
 
 
     //CART
