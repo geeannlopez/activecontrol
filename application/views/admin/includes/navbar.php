@@ -46,7 +46,7 @@
           </ul>          
         </li>
             <li><a href="<?= base_url()?>admin/inventory"><i class="fa fa-circle-o"></i><span>Inventory</span></a></li>
-            <li><a href="<?= base_url()?>admin/products"><i class="fa fa-circle-o"></i><span>Orders</span></a></li>            
+            <li><a href="<?= base_url()?>admin/orders"><i class="fa fa-circle-o"></i><span>Orders</span></a></li>            
       </ul>
       <!-- /.sidebar-menu -->
     </section>

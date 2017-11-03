@@ -83,7 +83,8 @@ function clear_cart() {
                                   <div class="col-md-3 col-sm-3">
 
                                     <?php if ($stock > 0) {
-                                        echo form_open('Main/add');
+                                    
+                                    echo form_open('Main/add');
                                     echo form_hidden('id', $id);
                                     echo form_hidden('name', $name);
                                     echo form_hidden('price', $price);
@@ -171,7 +172,7 @@ function clear_cart() {
                                     <?php echo $item['name']; ?>
                                 </td>
                                 <td>
-                                    $ <?php echo number_format($item['price'],2); ?>
+                                    ₱ <?php echo number_format($item['price'],2); ?>
                                 </td>
                                 <td>
                                 
@@ -209,8 +210,15 @@ function clear_cart() {
                                     <input type="button" value="Clear Cart" onclick="clear_cart()">
                                     <input type="submit" value="Update Cart">
                                     <?php echo form_close(); ?>
+                                    
+                                    <?php if($this->user->info('user_id')){ ?>
                                     <a href="<?=base_url()?>main/checkout_shipping" style="color: black">
-                                    <input type="button" value="Place Order">
+                                    <input type="button" value="Place Order"></a>
+                                    <?php }else{ ?>
+
+                                    <input type="button" title="Please Login to place and order" value="Place Order" disabled="">
+
+                                    <?php } ?>
                                 </td>
                             </tr>
                             <?php endif; ?>

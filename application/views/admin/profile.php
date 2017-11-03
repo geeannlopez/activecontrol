@@ -20,6 +20,7 @@
                             echo    $this->session->flashdata('message');
                             ?>
                             
+                            
                             <!-- endmessage -->
 
         <div class="col-md-6">
