@@ -124,6 +124,7 @@ class Admin extends MY_Controller
         $this->form_validation->set_rules('name', 'Product Name', 'trim|required|max_length[30]');
         $this->form_validation->set_rules('price', 'Price', 'trim|required');
         $this->form_validation->set_rules('description', 'Description', 'trim|required|min_length[6]');
+        $this->form_validation->set_rules('critical_level', 'Critical level', 'trim|required');
         $this->form_validation->set_rules('image', 'Image', 'callback_image_upload');
 
         if ($this->form_validation->run() == FALSE){
@@ -137,6 +138,7 @@ class Admin extends MY_Controller
             'prod_name' => $this->input->post('name'),
             'prod_price' => $this->input->post('price'),
             'prod_desc' => $this->input->post('description'),
+            'critical_level' => $this->input->post('critical_level'),
           //  'prod_category' => $this->input->post('category')
             );
 
@@ -364,6 +366,63 @@ class Admin extends MY_Controller
 
 
     /*******************END USER ACCOUNTS********************/
+    
+    /*******************ORDERS********************/
+
+        public function orders(){
+        
+        $data["orders"] = $this->product_model->jointable('*', 'order_header', 'users', 'order_header.user_id = users.user_id', 'left');
+
+        
+        parent::admin_page('orders', $data);
+    }
+
+    public function update_order(){
+        
+        $this->form_validation->set_rules('status', 'Order Status', 'required');
+
+         if ($this->form_validation->run() == FALSE)        {
+            // fails
+            $this->orders();
+        }
+        else
+        {
+            //insert the user registration details into database
+            $id = $this->input->post('id');
+            $data = array(
+                'status' => $this->input->post('status'),
+            );
+
+            // insert form data into database
+            if($this->product_model->updatedata('order_header', $data, array('order_id' => $id))){
+                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                            </button>Successfully Updated. </div>');
+                redirect('Admin/orders');
+            }else{
+                $this->session->set_flashdata('message', '<div  class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-    hidden="true">×</span><span class="sr-only">Close</span>
+                            </button>Unable to update.</div>');
+                redirect('Admin/orders');
+            }
+
+        }
+        
+        parent::admin_page('orders', $data);
+    }
+
+
+   public function view_order($id){
+
+        $data["order"] = $this->product_model->jointable_where('*', 'order_header', array('order_id' => $id), 'users', 'order_header.user_id = users.user_id', 'left');
+
+        $data["order_line"] = $this->product_model->jointable_where('*','order_line', array('order_line.order_id' => $id), 'products', 'order_line.prod_id = products.prod_id', 'left');
+
+
+        parent::admin_page('view_order', $data);
+    }
+
+    /*******************END ORDERS******************/
 
 
     /*************DEACTIVATE, WLANAG GINAGALAW**************/

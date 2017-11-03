@@ -30,7 +30,7 @@ class Main extends MY_Controller
         if ($category_id){
             $data["products"] = $this->product_model->jointable1(array('status' => 1, 'prod_category' => $category_id));
         }else{
-            $data["products"] = $this->product_model->jointable('*, order_line.prod_name prod_name', 'products', 'item_total', 'products.prod_id = item_total.product_id', 'left');
+            $data["products"] = $this->product_model->jointable('*', 'products', 'item_total', 'products.prod_id = item_total.product_id', 'left');
         }
 
 

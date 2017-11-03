@@ -2,14 +2,16 @@
             <div class="container">
 
 
-                <div class="row">
+                <div class="row" style="min-height: 550px;">
 
                     <!-- *** LEFT COLUMN ***
              _________________________________________________________ -->
                 <div class="col-md-2"></div>
                     <div class="col-md-8" id="customer-orders">
 
-                        <p class="text-muted lead">If you have any questions, please feel free to <a href="contact.html">contact us</a>.</p>
+                        <?php if( !empty($orders) ){  ?>
+                        <p class="text-muted lead">Your orders.</p>
+                        
 
                         <div class="box">
 
@@ -51,7 +53,10 @@
 
                         </div>
                         <!-- /.box -->
-
+                        <?php } elseif(true){ ?>
+                            <br><br><br><br><br><br><br>
+                            <p class="text-muted lead">You have no orders yet. <a href="<?=base_url()?>main/products">Shop now!</a> </p>                            
+                        <?php } ?> 
                     </div>
                     <!-- /.col-md-9 -->
 

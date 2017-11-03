@@ -13,10 +13,12 @@ $(document).ready(function(){
     var name = $(this).data('name');
     var price = $(this).data('price');
     var desc = $(this).data('desc');
+    var crit = $(this).data('crit');
        $(".id").val(id);
        $(".name").val(name);
        $(".price").val(price);
        $(".desc").val(desc);
+       $(".critical_level").val(crit);
 
     });
 
@@ -89,7 +91,7 @@ $(document).ready(function(){
                     <button class="btn btn btn-xs">Activate</button></a>
 
                  <?php  } ?> 
-                <button class="btn btn btn-xs pull-right edit"  data-toggle="modal" data-target="#edit"  data-id="<?= $i->prod_id ?>" data-name="<?= $i->prod_name ?>" data-desc="<?= $i->prod_desc ?>" data-price="<?= $i->prod_price ?>" data-category="<?= $i->prod_category ?>">EDIT</button></td>
+                <button class="btn btn btn-xs pull-right edit"  data-toggle="modal" data-target="#edit"  data-id="<?= $i->prod_id ?>" data-name="<?= $i->prod_name ?>" data-desc="<?= $i->prod_desc ?>" data-price="<?= $i->prod_price ?>" data-category="<?= $i->prod_category ?>" data-crit="<?= $i->critical_level ?>">EDIT</button></td>
                 </tr>
                 <?php } ?>
                 </tbody>
@@ -145,6 +147,12 @@ $(document).ready(function(){
                   </label> 
                 <textarea name="description" class="form-control desc" rows="4" cols="50"><?= set_value('description'); ?></textarea>
                 </div>
+                <div class="form-group">
+                  <label for="Price">
+                    Critical Level:
+                  </label>
+                  <input type="number" name="critical_level" min="1" class="form-control critical_level" value="<?= set_value('critical_level'); ?>" placeholder="Price">
+                </div>                
                 <div class="form-group">
                   <label for="Unit">
                     Image:
