@@ -65,7 +65,7 @@ $(function(){
                   <td><?=$i->prod_name?></td>
                   <td><?= $stock ?></td>
                   <td>
-                <button type="button" class="btn btn-default btn-xs add" data-toggle="modal" data-target="#add" data-id="<?=$i->prod_id?>" data-name="<?=$i->prod_name?>">Add</button>&nbsp;<button class="btn btn btn-xs">View</button>                <?php if($stock<$i->critical_level){echo '<i class="fa fa-exclamation-circle pull-right" style="font-size:16px;color:red"></i>';} ?></td>
+                <button type="button" class="btn btn-default btn-xs add" data-toggle="modal" data-target="#add" data-id="<?=$i->prod_id?>" data-name="<?=$i->prod_name?>">Add</button>&nbsp;<button class="btn btn btn-xs"><a href="<?=base_url()?>admin/item_movement/<?=$i->prod_id?>">View</a></button>                <?php if($stock<$i->critical_level){echo '<i class="fa fa-exclamation-circle pull-right" style="font-size:16px;color:red"></i>';} ?></td>
 
                 </tr>
                 <?php } ?>

@@ -91,7 +91,7 @@ $(document).ready(function(){
   </div>
   <!-- /.content-wrapper -->
 
-  <iv id="edit" class="modal fade" role="dialog">
+  <div id="edit" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->

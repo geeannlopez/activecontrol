@@ -173,6 +173,24 @@ class Admin extends MY_Controller
          parent::admin_page('inventory', $data);
         }
 
+    public function item_movement($id){
+        $this->form_validation->set_rules('to', 'To Date', 'required|callback_testfromto');
+
+        if ($this->form_validation->run() == FALSE){
+            $data["id"] = $this->uri->segment(3);
+
+            $data["report"] = $this->product_model->item_movement($id, NULL, NULL);
+
+            parent::admin_page('item_movement', $data);
+
+        }else{
+            $data["id"] = $this->uri->segment(3);
+
+            $data["report"] = $this->product_model->item_movement($id, NULL, NULL);
+         parent::admin_page('item_movement', $data);
+        }
+    }
+
       //view sa add ng stock
     public function add_stock(){
 
@@ -474,6 +492,18 @@ class Admin extends MY_Controller
             }   
             else{
                 $this->form_validation->set_message('checkpassword', "Incorrect Password");
+                return false;
+            }   
+    }
+
+    function testfromto(){
+
+        if ($_POST['from'] < $_POST['to']){
+
+             return true;
+            }   
+            else{
+                $this->form_validation->set_message('testfromto', "Incorrect date.");
                 return false;
             }   
     }

@@ -130,6 +130,33 @@ class product_model extends CI_Model
 
             $query = $this->db->get();
         return $query->result();
+    } 
+
+    function item_movement($id, $from, $to){
+        // $this->db->select('*');
+        // $this->db->from('item_received');
+        // $this->db->where('prod_id', $id);    
+        // $query1 = $this->db->get()->result();
+
+        // // Query #2
+
+        // $this->db->select('*');
+        // $this->db->from('order_line');
+        // $this->db->where('prod_id', $id);
+        // $query2 = $this->db->get()->result();
+
+        // $query = array_merge($query1, $query2);
+ 
+ $query = $this->db->query("SELECT * FROM (
+            (SELECT NULL AS order_id, NULL AS prod_name, i.prod_id prod_id, i.invoice_no, i.qty qty, i.invoice_date idate, i.amount_pc amount FROM item_received i WHERE i.prod_id = $id)
+            UNION ALL
+            (SELECT o.order_id order_id, o.prod_name prod_name, o.prod_id prod_id, NULL AS invoice_no, o.prod_qty qty, o.order_date idate, o.prod_price amount FROM order_line o WHERE o.prod_id = $id)
+        ) results
+        ORDER BY idate ASC
+");
+
+
+        return $query->result();
     }
     
 
