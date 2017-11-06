@@ -71,7 +71,7 @@
     }
 }
 
-/* PRODUCTS */
+/* PRODUCTS PAGE */
 
 .nav-stacked > li {
     float: none;
@@ -110,5 +110,26 @@ td{
     }
     a{
         color: red;
+    }
+}
+
+/* SHOPPING CART PAGE */
+
+.shopping_cart{
+    tfoot{
+        font-size: 14px;
+    }
+    th{
+        color: black;
+        text-align: center;
+        background-color: #9cc8a6;
+    }
+    tr{
+        &:nth-child(odd){
+            background-color: #dadada;
+        }
+        &:nth-child(even){
+            background-color: #ebebeb;
+        }
     }
 }
