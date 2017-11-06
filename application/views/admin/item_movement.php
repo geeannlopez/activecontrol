@@ -1,4 +1,4 @@
-<?php  var_dump($report);die(); ?>
+
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -19,60 +19,53 @@
               </div>                
              <!-- endmessage -->
             <!-- /.box-header -->
+            <br>
+            <br>
             <div class="box-body">
 <?php
-              $from = new DateTime($_POST['from']);
-              $to = new DateTime($_POST['to']);
+//               $from = new DateTime($_POST['from']);
+//               $to = new DateTime($_POST['to']);
 
-$daterange = new DatePeriod($from, new DateInterval('P1D'), $to);
-var_dump($report);die();
-foreach($daterange as $date){
-    echo $date->format("m-d-Y") . "<br>";
+// $daterange = new DatePeriod($from, new DateInterval('P1D'), $to);
+// var_dump($report);die();
+// foreach($daterange as $date){
+//     echo $date->format("m-d-Y") . "<br>";
 
-    foreach ($report as $i) {
+//     foreach ($report as $i) {
        
-     } 
-}
+//      } 
+// }
 
 ?>
-              <!-- <table class="table table-bordered table-striped">
+         <table class="table table-bordered table-striped" style="width: 50%; margin: auto; border: 3px">
                 <thead>
                 <tr>
-                  <th>Order #</th>
-                  <th>Order By:</th>
-                  <th>Date Ordered</th>
-                  <th>Last Update</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                  <th> </th>
+                  <th>Date</th>
+                  <th>Invoice/Order #</th>
+                  <th>In</th>
+                  <th>Out</th>
+                  <th style="border-left: solid 3px;">Balance</th>
                 </tr>
                 </thead>
                 <tbody>
 
 
-                <?php foreach ($orders as $i) { ?>
+                <?php 
+                $total = 0;
+                foreach ($report as $i) { ?>
+                
                 <tr>  
-                  <td><?=$i->order_id?></td>
-                  <td><?=$i->user_name?></td>
-                  <td><?= $i->order_date?></td>
-                  <td><?= $i->date_updated?></td>
-                  <td><?= $i->order_amount?></td>
-                  <td>
-                    <?php if($i->status=="processing"){ ?>
-                       <span class="label label-info">Processing</span>
-                       <?php }else if($i->status=="delivery"){?>
-                      <span class="label label-warning">Ready to deliver</span>
-                     <?php }else{ ?>
-                      <span class="label label-success">Received</span>
-                      <?php } ?>
-                      </td>
-                      <td>
-                <button class="btn btn btn-xs edit"  data-toggle="modal" data-target="#edit"  data-id="<?= $i->order_id ?>" data-status="<?= $i->status ?>">Change Status</button>
-                <button class="btn btn btn-xs"><a href="<?= base_url()?>admin/view_order/<?=$i->order_id?>">View Order</a></button></td>
+                  <td><?php $date = new DateTime($i->idate);
+                      echo $date->format('Y-m-d');
+                  ?></td>
+                  <td><?=$i->invoice_no, $i->order_id?></td>
+                  <td><?php echo ($i->invoice_no ? $i->qty : NULL) ?></td>
+                  <td><?php echo ($i->invoice_no ? NULL : $i->qty) ?></td>
+                  <td style="border-left: solid 3px;"><?php echo ($i->invoice_no ? $total+=$i->qty : $total-=$i->qty) ?></td>
                 </tr>
                 <?php } ?>
                 </tbody>
-              </table> -->
+              </table> 
             </div>
             <!-- /.box-body -->
 

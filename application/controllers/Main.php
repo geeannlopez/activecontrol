@@ -8,6 +8,7 @@ class Main extends MY_Controller
         // $this->load->helper('encryptor');
         $this->load->model('user_model');
         $this->load->model('product_model');
+        $this->load->helper('string');
 
         if($this->user->info('user_type') == 'admin' || $this->user->info('user_type') == 'superadmin'){
             redirect('/admin');
@@ -117,7 +118,10 @@ class Main extends MY_Controller
         }
     }
 
-       redirect('main/success/'.$order_id); 
+
+    redirect('main/success/'.$order_id); 
+
+       // redirect('main/success/'.$order_id); 
     }
 
 
@@ -265,6 +269,44 @@ class Main extends MY_Controller
     }
      */
 
+
+//PAYMENTS
+    public function do_purchase(){
+
+        $config['business']             = 'test-active@gmail.com';
+        $config['cpp_header_image']     = ''; //Image header url [750 pixels wide by 90 pixels high]
+        $config['return']               = base_url()."main/save_order";
+        $config['cancel_return']        = base_url()."main/checkout-info";
+        $config['notify_url']           = 'process_payment.php'; //IPN Post
+        $config['production']           = FALSE; //Its false by default and will use sandbox
+        $config['discount_rate_cart']   = 0; //This means 20% discount
+        $config["invoice"]              = random_string('numeric', 0); //The invoice id
+        
+        $this->load->library('paypal',$config);
+        
+        #$this->paypal->add(<name>,<price>,<quantity>[Default 1],<code>[Optional]);
+        
+        $cart = $this->cart->contents();
+
+        foreach ($cart as $i) {
+            $this->paypal->add($i["name"],$i["price"],$i["qty"],$i["id"]);
+            # code...
+        }
+        $this->paypal->pay(); //Proccess the payment
+
+        }
+
+        // public function notify_payment(){
+
+            // $received_data = print_r($this->input->post(),TRUE);
+
+            // echo "<pre>".$received_data."</pre>";
+        // }
+
+        public function cancel_payment(){
+
+
+        }
 
 //SHOPPING CART
     public function add()

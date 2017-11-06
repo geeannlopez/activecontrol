@@ -140,7 +140,7 @@
 
                                 <div class="box-footer">
                                     <div class="pull-left">
-                                        <a href="<?=base_url()?>main/shoppingcart" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to basket</a>
+                                        <a href="<?=base_url()?>main/do_purchase" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to basket</a>
                                     </div><!-- <div class="pull-right">
                                         <a href="<?= base_url()?>main/payment"><button class="btn btn-template-main">Continue to Payment<i class="fa fa-chevron-right"></i>
                                         </button>
