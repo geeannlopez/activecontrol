@@ -38,15 +38,16 @@ class Main extends MY_Controller
         parent::main_page('products', $data);
     }
 
+
     function register(){
         //set validation rules
         $this->form_validation->set_rules('name', 'Full Name', 'trim|required|min_length[3]|max_length[30]');
-        $this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email|is_unique[users.user_email]');
+        $this->form_validation->set_rules('email1', 'Email Address', 'trim|required|valid_email|is_unique[users.user_email]');
         $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required');
         $this->form_validation->set_rules('contact', 'Contact Number', 'trim|required|numeric');
-        $this->form_validation->set_rules('address', 'Address', 'trim|required');
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
-        $this->form_validation->set_rules('cpassword', 'Confirm Password', 'required|matches[password]');
+        $this->form_validation->set_rules('address', 'Address', 'trim|required|min_length[6]|');
+        $this->form_validation->set_rules('password1', 'Password', 'required|min_length[6]');
+        $this->form_validation->set_rules('cpassword', 'Confirm Password', 'required|matches[password1]');
 
         //validate form input
         if ($this->form_validation->run() == FALSE)        {
@@ -58,11 +59,11 @@ class Main extends MY_Controller
             //insert the user registration details into database
             $data = array(
                 'user_name' => $this->input->post('name'),
-                'user_email' => $this->input->post('email'),
+                'user_email' => $this->input->post('email1'),
                 'user_bday' => $this->input->post('birthday'),
                 'user_contactno' => $this->input->post('contact'),
                 'user_address' => $this->input->post('address'),
-                'user_pass' => md5($this->input->post('password'))
+                'user_pass' => md5($this->input->post('password1'))
             );
 
             // insert form data into database
@@ -80,6 +81,7 @@ class Main extends MY_Controller
 
         }
     }
+
 
 
 
@@ -181,13 +183,12 @@ class Main extends MY_Controller
         function login_registration()
     {
 
-        $this->form_validation->set_rules('email', 'Email Address', 'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|callback_check_database');
 
         if($this->form_validation->run() == FALSE)
         {
             //Field validation failed.  User redirected to login page
-            $this->register();
+          parent::main_page('registration');
         }
         else
         {

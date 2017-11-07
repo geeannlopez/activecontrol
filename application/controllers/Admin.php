@@ -17,7 +17,21 @@ class Admin extends MY_Controller
     }
  
     public function index(){
-        parent::admin_page('page');
+        $data["orders"] = $this->product_model->numrows('order_header', array('status' => "processing" ));
+        $prod = $this->product_model->jointable('*', 'products', 'item_total', 'products.prod_id = item_total.product_id', 'left'); 
+
+        $data["low_stock"] = 0;
+            foreach ($prod as $i) {
+               $stock = $i->qty_received-$i->qty_delivered;
+                 if($stock<$i->critical_level){
+                    $data['low_stock']++;
+                 }
+            }
+
+        $data["customers"] = $this->product_model->numrows('users', array('user_type' => "customer" ));
+
+
+              parent::admin_page('page', $data);
     }
 
 
@@ -410,6 +424,24 @@ class Admin extends MY_Controller
             $data = array(
                 'status' => $this->input->post('status'),
             );
+
+            if($this->input->post('status') == "cancelled"){
+                $orderline = $this->product_model->fetchdata('order_line', array('order_id' => $id ));
+
+                foreach ($orderline as $i) {
+                       $data1 = array(
+                'prod_id' => $i->prod_id,
+                'qty' => $i->prod_qty,
+                'invoice_no' => $id,
+                'remarks' => "cancelled order (order id: ".$id.")"
+                );
+
+
+                $this->product_model->insertdata($table = "item_received", $data1);
+                $this->product_model->update_stock_a($i->prod_id, $i->prod_qty, NULL);
+
+                }
+            }
 
             // insert form data into database
             if($this->product_model->updatedata('order_header', $data, array('order_id' => $id))){

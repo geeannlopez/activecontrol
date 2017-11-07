@@ -70,13 +70,16 @@ $(document).ready(function(){
                     <?php if($i->status=="processing"){ ?>
                        <span class="label label-info">Processing</span>
                        <?php }else if($i->status=="delivery"){?>
-                      <span class="label label-warning">Ready to deliver</span>
+                      <span class="label label-warning">For Delivery</span>
+                     <?php }else if($i->status=="cancelled"){?>
+                      <span class="label label-danger">Cancelled</span>
                      <?php }else{ ?>
                       <span class="label label-success">Received</span>
                       <?php } ?>
                       </td>
                       <td>
-                <button class="btn btn btn-xs edit"  data-toggle="modal" data-target="#edit"  data-id="<?= $i->order_id ?>" data-status="<?= $i->status ?>">Change Status</button>
+
+                <button class="btn btn btn-xs edit"  data-toggle="modal" data-target="#edit"  data-id="<?= $i->order_id ?>" data-status="<?= $i->status ?>" <?php if($i->status=="cancelled"){ echo 'disabled';} ?>>Change Status</button>
                 <button class="btn btn btn-xs"><a href="<?= base_url()?>admin/view_order/<?=$i->order_id?>">View Order</a></button></td>
                 </tr>
                 <?php } ?>
@@ -119,12 +122,13 @@ $(document).ready(function(){
                    Status:
                   </label>
                   <select class="status form-control" name="status">
-                    <option value="processing">processing</option>
-                    <option value="delivery">delivery</option>
-                    <option value="received">received</option>
+                    <option value="processing">Processing</option>
+                    <option value="delivery">Delivery</option>
+                    <option value="received">Received</option>
+                    <option value="cancelled">Cancel</option>
                   </select>
                 </div>
-                
+                NOTE: Cancelled cannot be changed.
                 
               <!-- /.box-body -->
 

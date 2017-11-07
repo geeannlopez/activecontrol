@@ -193,7 +193,7 @@ function clear_cart() {
                                     ₱ <?php echo number_format($item['subtotal'],2) ?>
                                 </td>
                                 <td>
-                                    <?php echo anchor('main/remove/'.$item['rowid'],'Remove'); ?>
+                                    <?php echo anchor('main/remove/'.$item['rowid'],'<i class="fa fa-trash-o" aria-hidden="true"></i>'); ?>
                                 </td>
                                 <?php endforeach; ?>
                             </tr>

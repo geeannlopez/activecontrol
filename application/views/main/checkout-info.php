@@ -16,7 +16,7 @@
 
                     <div class="col-md-9 clearfix" id="checkout">
 
-                        <div class="box">
+                        <div class="box">   
                                 <ul class="nav nav-pills nav-justified">
                                     <li class=""><a href="#"><i class="fa fa-eye"></i><br>Order Review</a>
                                     </li>
@@ -25,17 +25,19 @@
 
                                 <div class="content">
                                     <div class="row">
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-8">
                                                 <b><?= $this->user->info('user_name') ?></b><br>
                                                  <?= $this->user->info('user_address') ?><br>
                                                     Mobile Number: <?= $this->user->info('user_contactno') ?><br>
                                                     Email Address: <?= $this->user->info('user_email') ?>     
 
                                         </div>
+
+
                                     </div>
-                                        <br>
+                                        <br><hr>
                                     <div class="table-responsive">
-                                        <table class="table">
+                                        <table class="table" style="background: white;">
                                             <thead>
                                                 <tr>
                                                     <th colspan="2">Product</th>
@@ -140,11 +142,16 @@
 
                                 <div class="box-footer">
                                     <div class="pull-left">
-                                        <a href="<?=base_url()?>main/do_purchase" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to basket</a>
+                                        <a href="<?=base_url()?>main/products" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to basket</a>
                                     </div><!-- <div class="pull-right">
                                         <a href="<?= base_url()?>main/payment"><button class="btn btn-template-main">Continue to Payment<i class="fa fa-chevron-right"></i>
                                         </button>
-                                    </div> -->                              <div class="pull-right" data-amount="<?=$this->cart->total()?>" id="paypal-button-container"></div>                        </div>
+                                    </div> -->    <!-- <div class="pull-right" data-amount="<?=$this->cart->total()?>" id="paypal-button-container"></div> -->
+ <div class="pull-right">
+                                        <a href="<?=base_url()?>main/do_purchase" class="btn btn-default">Proceed to Payment<i class="fa fa-chevron-right"></i></a>
+                                    </div>
+
+                                                            </div>
                         </div>
                         <!-- /.box -->
 
@@ -207,26 +214,30 @@
                             <p class="text-muted"></p>
 
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table"  style="background: white;">
                                     <tbody>
                                         <tr>
-                                            <th>Delivery subtotal</td>
+                                            <th>Order subtotal</th>
                                             <th>₱<?= number_format($this->cart->total(), 2); ?></th>
                                         </tr>
                                         <tr>
-                                            <th>Delivery and handling</td>
+                                            <th>Delivery and handling</th>
                                             <th>FREE</th>
                                         </tr>
                                         <tr class="total">
-                                            <td>Total</td>
+                                            <th>Total</th>
                                             <th>₱<?= number_format($this->cart->total(), 2); ?></th>
                                         </tr>
                                     </tbody>
-                                </table>
+                                </table> 
+                                
                             </div>
 
                         </div>
-
+<center>
+                            <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" alt="PayPal Logo">
+                                    
+                                </center>
                     </div>
                     <!-- /.col-md-3 -->
 
