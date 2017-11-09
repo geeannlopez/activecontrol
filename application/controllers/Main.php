@@ -22,6 +22,10 @@ class Main extends MY_Controller
     public function about(){
         parent::main_page('about');
     }
+
+    public function contact(){
+        parent::main_page('contact');
+    }
     
     public function products(){
         $category_id = $this->uri->segment(3);

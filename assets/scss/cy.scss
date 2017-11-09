@@ -1,3 +1,10 @@
+/* MEDIAQUERIES */
+@mixin media-small {
+    @media only screen and (min-width: 220px) and (max-width: 480px) {
+        @content;
+    }
+}
+
 /* NAVBAR  */
 
 #top{
@@ -133,3 +140,66 @@ td{
         }
     }
 }
+
+/* ABOUT PAGE */
+
+.about_container{
+    min-height: 550px;
+    height: auto;
+    padding: 20px 130px;
+    @include media-small{
+        padding: 20px 15px;
+    }
+    h1{
+        font-size: 35px;
+    }
+    h5{ 
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 1.5;
+        b{
+            color: #178d3c;
+            font-size: 15px;
+        }
+    }
+    h3{
+        color: #178d3c;
+    }
+    .mission{
+        text-align: left;
+    }
+    .vision{
+        text-align: right;
+    }
+}
+
+/* CONTACT PAGE */
+
+.contact_container{
+    min-height: 650px;
+    height: auto;
+    padding: 20px 130px;
+    @include media-small{
+        padding: 20px 15px;
+    }
+    h1{
+        font-size: 35px;
+        color: #178d3c;
+    }
+    h5{ 
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 1.5;
+        b{
+            color: #178d3c;
+            font-size: 15px;
+        }
+    }
+    .mission{
+        text-align: left;
+    }
+    .vision{
+        text-align: right;
+    }
+}
+

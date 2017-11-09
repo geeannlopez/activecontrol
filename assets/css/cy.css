@@ -1,3 +1,4 @@
+/* MEDIAQUERIES */
 /* NAVBAR  */
 #top {
   background-color: white; }
@@ -92,5 +93,52 @@ td {
   background-color: #dadada; }
 .shopping_cart tr:nth-child(even) {
   background-color: #ebebeb; }
+
+/* ABOUT PAGE */
+.about_container {
+  min-height: 550px;
+  height: auto;
+  padding: 20px 130px; }
+  @media only screen and (min-width: 220px) and (max-width: 480px) {
+    .about_container {
+      padding: 20px 15px; } }
+  .about_container h1 {
+    font-size: 35px; }
+  .about_container h5 {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.5; }
+    .about_container h5 b {
+      color: #178d3c;
+      font-size: 15px; }
+  .about_container h3 {
+    color: #178d3c; }
+  .about_container .mission {
+    text-align: left; }
+  .about_container .vision {
+    text-align: right; }
+
+/* CONTACT PAGE */
+.contact_container {
+  min-height: 650px;
+  height: auto;
+  padding: 20px 130px; }
+  @media only screen and (min-width: 220px) and (max-width: 480px) {
+    .contact_container {
+      padding: 20px 15px; } }
+  .contact_container h1 {
+    font-size: 35px;
+    color: #178d3c; }
+  .contact_container h5 {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.5; }
+    .contact_container h5 b {
+      color: #178d3c;
+      font-size: 15px; }
+  .contact_container .mission {
+    text-align: left; }
+  .contact_container .vision {
+    text-align: right; }
 
 /*# sourceMappingURL=cy.css.map */
