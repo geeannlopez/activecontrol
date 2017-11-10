@@ -29,7 +29,7 @@ _________________________________________________________ -->
 
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
-                                    <a href="<?=base_url()?>" class="dropdown-toggle">ABOUT</a>
+                                    <a href="<?=base_url()?>main/about" class="dropdown-toggle">ABOUT</a>
                                 </li>
                                 <li class="dropdown">
                                     <a href="<?=base_url()?>main/products" class="dropdown-toggle">PRODUCTS</a>
@@ -38,7 +38,7 @@ _________________________________________________________ -->
                                     <a href="<?=base_url()?>#principals" class="dropdown-toggle">OUR PRINCIPALS</a>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="<?=base_url()?>" class="dropdown-toggle">CONTACT</a>
+                                    <a href="<?=base_url()?>main/contact" class="dropdown-toggle">CONTACT</a>
                                 </li>
 
                             </ul>
