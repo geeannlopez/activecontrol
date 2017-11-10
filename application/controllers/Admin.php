@@ -280,7 +280,6 @@ class Admin extends MY_Controller
                 'user_contactno' => $this->input->post('contact'),
                 'user_address' => $this->input->post('address'),
                 'user_pass' => md5($this->input->post('password')),
-                'user_type' => 'admin'
             );
 
             //insert form data into database
@@ -520,8 +519,11 @@ class Admin extends MY_Controller
 
         if($status == 'deactivate'){
             $this->product_model->updatedata($table = "product_category",  array('status' => 0 ), $where = array('category_id' => $id ));
+        $this->product_model->updatedata($table = "products",  array('status' => 0 ), $where = array('prod_category' => $id ));
         }else{
+
             $this->product_model->updatedata($table = "product_category",  array('status' => 1 ), $where = array('category_id' => $id ));
+            $this->product_model->updatedata($table = "products",  array('status' => 1 ), $where = array('prod_category' => $id ));
 
         }
          redirect('Admin/category');

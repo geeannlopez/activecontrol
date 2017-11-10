@@ -36,27 +36,27 @@
                             <form action="<?=base_url()?>main/register" method="post">
                                 <div class="form-group">
                                     <label for="name">Full Name</label>
-                                    <input type="text" class="form-control" id="name" name="name">
+                                    <input type="text" class="form-control" id="name" name="name" value="<?php echo set_value('name'); ?>">
                                     <?php echo form_error('name', '<font color="red">', '</font>'); ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="text" class="form-control" id="email" name="email1">
-                                    <?php echo form_error('email1', '<font color="red">', '</font>'); ?>
+                                    <input type="text" class="form-control" id="email" name="email1" value="<?php echo set_value('email'); ?>">
+                                    <?php echo form_error('email1',  value="<?php echo set_value('birthday'); ?>"'<font color="red">', '</font>'); ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="birthday">Date of Birth</label>
-                                    <input type="date" class="form-control" id="birthday" name="birthday">
+                                    <input type="date" class="form-control" id="birthday" name="birthday" value="<?php echo set_value('birthday'); ?>">
                                      <?php echo form_error('birthday', '<font color="red">', '</font>'); ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="contact">Contact</label>
-                                    <input type="text" class="form-control" id="contact" name="contact">
+                                    <input type="text" class="form-control" id="contact" name="contact" value="<?php echo set_value('contact'); ?>">
                                        <?php echo form_error('contact', '<font color="red">', '</font>'); ?> 
                                 </div>
                                 <div class="form-group">
                                     <label for="address">Address</label>
-                                    <input type="text" class="form-control" id="address" name="address">
+                                    <input type="text" class="form-control" id="address" name="address" value="<?php echo set_value('address'); ?>">
                                         <?php echo form_error('address', '<font color="red">', '</font>'); ?>
                                 </div>
                                 <div class="form-group">

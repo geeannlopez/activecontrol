@@ -22,7 +22,7 @@
                                     </div>
                                         <br>
                                     <div class="table-responsive">
-                                        <table class="table">
+                                        <table class="table" style="background: white">
                                             <thead>
                                                 <tr>
                                                     <th colspan="3">Product</th>

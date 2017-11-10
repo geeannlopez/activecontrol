@@ -31,9 +31,11 @@ class Main extends MY_Controller
         $category_id = $this->uri->segment(3);
 
         $data["category"] = $this->product_model->fetchdata("product_category", array('status' => 1));
+            $data["prods"] = $this->product_model->jointable1(array('status' => 1));
 
         if ($category_id){
             $data["products"] = $this->product_model->jointable1(array('status' => 1, 'prod_category' => $category_id));
+
         }else{
             $data["products"] = $this->product_model->jointable_where('*', 'products', array('status' => 1), 'item_total', 'products.prod_id = item_total.product_id', 'left');
         }

@@ -177,7 +177,7 @@ function clear_cart() {
                                 <td>
                                 
 
-                          <?php foreach ($products as $i) {
+                          <?php foreach ($prods as $i) {
 
                             $id = $i->prod_id;
                             $name = $i->prod_name;
