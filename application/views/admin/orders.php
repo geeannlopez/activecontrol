@@ -79,7 +79,7 @@ $(document).ready(function(){
                       </td>
                       <td>
 
-                <button class="btn btn btn-xs edit"  data-toggle="modal" data-target="#edit"  data-id="<?= $i->order_id ?>" data-status="<?= $i->status ?>" <?php if($i->status=="cancelled"){ echo 'disabled';} ?>>Change Status</button>
+                <button class="btn btn btn-xs edit"  data-toggle="modal" data-target="#edit"  data-id="<?= $i->order_id ?>" data-status="<?= $i->status ?>" <?php if($i->status=="cancelled" || $i->status=="received"){ echo 'disabled';} ?>>Change Status</button>
                 <button class="btn btn btn-xs"><a href="<?= base_url()?>admin/view_order/<?=$i->order_id?>">View Order</a></button></td>
                 </tr>
                 <?php } ?>
@@ -128,7 +128,7 @@ $(document).ready(function(){
                     <option value="cancelled">Cancel</option>
                   </select>
                 </div>
-                NOTE: Cancelled cannot be changed.
+                NOTE: Cancelled orders cannot be recovered.
                 
               <!-- /.box-body -->
 

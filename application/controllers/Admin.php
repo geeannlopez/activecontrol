@@ -44,13 +44,15 @@ class Admin extends MY_Controller
     }
 
     public function a_category(){
+        $this->form_validation->set_rules('brand', '', 'trim|required|min_length[3]|max_length[30]');
         $this->form_validation->set_rules('name', 'Category', 'trim|required|min_length[3]|max_length[30]');
 
         if ($this->form_validation->run() == FALSE){
             $this->category();
         }else{
             $data = array(
-            'category_name' => $this->input->post('name')
+            'category_name' => $this->input->post('name'),
+            'category_brand' => $this->input->post('brand')
             );
 
         if($_POST["action"] == "add"){
@@ -509,6 +511,20 @@ class Admin extends MY_Controller
 
         }
          redirect('Admin/products');
+        }
+
+    public function deactivate_cat(){
+        $id = $this->uri->segment(3);
+        $status = $this->uri->segment(4);
+        
+
+        if($status == 'deactivate'){
+            $this->product_model->updatedata($table = "product_category",  array('status' => 0 ), $where = array('category_id' => $id ));
+        }else{
+            $this->product_model->updatedata($table = "product_category",  array('status' => 1 ), $where = array('category_id' => $id ));
+
+        }
+         redirect('Admin/category');
         }        
 
 

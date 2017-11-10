@@ -77,10 +77,10 @@ $(document).ready(function(){
                   <td><?= $i->created_date?></td>
                   <td><?= $i->last_updated?>
                   <td><?php if ($i->status == 1){
-                      echo "active";
+                       echo "<span class='label label-success'>Active</span>";
                     }else{
-                      echo "inactive";
-                      }?>         
+                      echo "<span class='label label-danger'>Inactive</span>";
+                      }?>           
                   </td>
                   <td>
                   <?php if ($i->status == 1){ ?>

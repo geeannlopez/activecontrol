@@ -16,7 +16,7 @@
                         <div class="box">
 
                             <div class="table-responsive">
-                                <table class="table table-hover">
+                                <table class="table table-hover" style="background: white">
                                     <thead>
                                         <tr>
                                             <th>Order</th>
@@ -33,6 +33,7 @@
                                             <th># <?= $i->order_id ?></th>
                                             <td><?= $i->order_date ?></td>
                                             <td>₱ <?= $i->order_amount ?></td>
+                                            <td>
                          <?php if($i->status=="processing"){ ?>
                        <span class="label label-info">Processing</span>
                        <?php }else if($i->status=="delivery"){?>
@@ -41,7 +42,7 @@
                       <span class="label label-danger">Cancelled</span>
                      <?php }else{ ?>
                       <span class="label label-success">Received</span>
-                      <?php } ?>
+                      <?php } ?></td>
                                             <td><a href="<?= base_url()?>customer/view_order/<?=$i->order_id?>" class="btn btn-template-main btn-sm">View</a>
                                             </td>
                                         </tr>

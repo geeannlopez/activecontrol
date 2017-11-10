@@ -25,7 +25,9 @@
                         <div class="box">
                             <h2 class="text-uppercase">New account</h2>
                             
-
+                            <?php  
+                            echo    $this->session->flashdata('message');
+                            ?>
                             
                             <p class="lead">Not our registered customer yet?</p>
 

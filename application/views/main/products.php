@@ -176,17 +176,30 @@ function clear_cart() {
                                 </td>
                                 <td>
                                 
-                                <?php
+
+                          <?php foreach ($products as $i) {
+
+                            $id = $i->prod_id;
+                            $name = $i->prod_name;
+                            $price = $i->prod_price;
+                            $stock = $i->qty_received-$i->qty_delivered;
+
+                        
+                        if($id == $item['id']){
                                     $data = array(
                                         'type'  => 'number',
                                         'name'  => 'cart['. $item['id'] .'][qty]',
                                         'value' => $item["qty"],
                                         'size'  => '1',
                                         'min'   => '1',
+                                        'max'   => $stock,
                                         'style' => 'width: 50px;'
                                     );
 
-                                    echo form_input($data); ?> 
+                                    echo form_input($data); 
+                                }
+
+                         } ?>
                                 </td>
                                 <?php $grand_total = $grand_total + $item['subtotal']; ?>
                                 <td>
@@ -206,6 +219,7 @@ function clear_cart() {
                             <tr></tr>
                             <tr>
                                 <td colspan="5" align="center">
+
                                     <br>
                                     <input type="button" value="Clear Cart" onclick="clear_cart()">
                                     <input type="submit" value="Update Cart">
@@ -216,13 +230,16 @@ function clear_cart() {
                                     <input type="button" value="Place Order"></a>
                                     <?php }else{ ?>
 
+
                                     <input type="button" title="Please Login to place and order" value="Place Order" disabled="">
 
-                                    <?php } ?>
+                                    <?php } ?><br><br>
+                                   <?php if (!$this->user->info('user_type')){ echo "<font color='red'>Please login to place an order</font>";} ?>   
                                 </td>
                             </tr>
                             <?php endif; ?>
                         </table>
+
                     </div>
 
                     <!-- *** RIGHT COLUMN END *** -->

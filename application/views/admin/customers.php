@@ -41,10 +41,10 @@ img{
                   <td><?= $i->user_contactno?></td>
                   <td><?= $i->date_created?></td>
                   <td><?php if ($i->user_status == 1){
-                      echo "active";
+                      echo "<span class='label label-success'>Active</span>";
                     }else{
-                      echo "deactivated";
-                      }?>         
+                      echo "<span class='label label-danger'>Deactivated</span>";
+                      }?>        
                   </td>
                   <td>
                     <?php if ($i->user_status == 1){ ?>

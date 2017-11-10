@@ -31,7 +31,7 @@ class Main extends MY_Controller
         if ($category_id){
             $data["products"] = $this->product_model->jointable1(array('status' => 1, 'prod_category' => $category_id));
         }else{
-            $data["products"] = $this->product_model->jointable('*', 'products', 'item_total', 'products.prod_id = item_total.product_id', 'left');
+            $data["products"] = $this->product_model->jointable_where('*', 'products', array('status' => 1), 'item_total', 'products.prod_id = item_total.product_id', 'left');
         }
 
 
@@ -45,7 +45,7 @@ class Main extends MY_Controller
         $this->form_validation->set_rules('email1', 'Email Address', 'trim|required|valid_email|is_unique[users.user_email]');
         $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required');
         $this->form_validation->set_rules('contact', 'Contact Number', 'trim|required|numeric');
-        $this->form_validation->set_rules('address', 'Address', 'trim|required|min_length[6]|');
+        $this->form_validation->set_rules('address', 'Address', 'trim|required|min_length[6]');
         $this->form_validation->set_rules('password1', 'Password', 'required|min_length[6]');
         $this->form_validation->set_rules('cpassword', 'Confirm Password', 'required|matches[password1]');
 
