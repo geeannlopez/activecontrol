@@ -50,8 +50,6 @@ $(document).ready(function(){
               <form role="form" action="<?= base_url()?>admin/a_category"  method="POST">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="name">Brand Name</label>
-                  <input type="text" name="brand" class="form-control" placeholder="Brand" value="<?= set_value('brand'); ?>">
                   <label for="name">Category Name</label>
                   <input type="text" name="name" class="form-control" placeholder="Category" value="<?= set_value('name'); ?>">
 
@@ -71,8 +69,6 @@ $(document).ready(function(){
                 <div class="form-group">
                   <label for="name">ID</label>
                   <input type="text" name="id" class="form-control id" placeholder="Category" readonly>
-                  <label for="name">Category Brand</label>
-                  <input type="text" name="brand" class="form-control brand" placeholder="brand">
                   <label for="name">Category Name</label>
                   <input type="text" name="name" class="form-control name" placeholder="Category">
                   <input type="hidden" name="action" class="form-control" value="update" placeholder="">
@@ -89,7 +85,6 @@ $(document).ready(function(){
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Brand</th>
                   <th>Name</th>
                   <th>Status</th>
                   <th> </th>
@@ -98,7 +93,6 @@ $(document).ready(function(){
                 <tbody>
                 <?php foreach ($category as $i) { ?>
                 <tr>
-                  <td><?= $i->category_brand; ?></td>
                   <td><?= $i->category_name; ?></td>
                   <td><?php if ($i->status == 1){
                       echo "<span class='label label-success'>Active</span>";

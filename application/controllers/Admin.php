@@ -44,15 +44,13 @@ class Admin extends MY_Controller
     }
 
     public function a_category(){
-        $this->form_validation->set_rules('brand', '', 'trim|required|min_length[3]|max_length[30]');
         $this->form_validation->set_rules('name', 'Category', 'trim|required|min_length[3]|max_length[30]');
 
         if ($this->form_validation->run() == FALSE){
             $this->category();
         }else{
             $data = array(
-            'category_name' => $this->input->post('name'),
-            'category_brand' => $this->input->post('brand')
+            'category_name' => $this->input->post('name')
             );
 
         if($_POST["action"] == "add"){
