@@ -88,9 +88,7 @@ _________________________________________________________ -->
                     <li class="item">
                         <img src="<?=base_url()?>images/winters.jpeg" alt="" class="img-responsive principals">
                     </li>
-                    <li class="item">
-                        <img src="<?=base_url()?>images/marsh.jpg" alt="" class="img-responsive principals">
-                    </li>
+
                     <li class="item">
                         <img src="<?=base_url()?>images/suco.jpg" alt="" class="img-responsive principals">
                     </li>
@@ -103,6 +101,9 @@ _________________________________________________________ -->
                     <li class="item">
                         <img src="<?=base_url()?>/assets/img/customer-6.png" alt="" class="img-responsive">
                     </li>
+                                       <li class="item">
+                        <img src="<?=base_url()?>images/marsh.jpg" alt="" class="img-responsive principals">
+                    </li> 
                 </ul>
                 <!-- /.owl-carousel -->
             </div>
