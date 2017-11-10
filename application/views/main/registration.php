@@ -42,7 +42,7 @@
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="text" class="form-control" id="email" name="email1" value="<?php echo set_value('email'); ?>">
-                                    <?php echo form_error('email1',  value="<?php echo set_value('birthday'); ?>"'<font color="red">', '</font>'); ?>
+                                    <?php echo form_error('email1','<font color="red">', '</font>'); ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="birthday">Date of Birth</label>
