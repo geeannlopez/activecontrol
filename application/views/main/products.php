@@ -95,7 +95,13 @@ function clear_cart() {
                                     <button class="btn btn-template-main" disabled="">Add to Cart</button>
                                     <?php }
                                     ?>
+                                    <?php if($stock != 0){ ?>
                                     <p class="text"><?= "Available: ".$stock ?></p>
+                                    <?php }else{ ?>
+                                    <p class="text"><?= "Out of stock" ?></p>
+                                    
+
+                                    <?php } ?>
                                   </div>
                                 </div>
                                 <!-- /.product -->
@@ -237,7 +243,13 @@ function clear_cart() {
                                    <?php if (!$this->user->info('user_type')){ echo "<font color='red'>Please login to place an order</font>";} ?>   
                                 </td>
                             </tr>
-                            <?php endif; ?>
+                            <?php endif; 
+                                if (!$this->cart->contents()){
+                                    echo "Shopping Cart is Empty!";
+
+                                }
+                            ?>
+
                         </table>
 
                     </div>
